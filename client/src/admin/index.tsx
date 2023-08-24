@@ -1,5 +1,5 @@
 import { Admin, Resource, ShowGuesser } from "react-admin";
-import { Dashboard, UserList, TicketList, TicketEdit, TicketCreate } from "../components";
+import { AlbumList, Dashboard, UserList, TicketList, TicketEdit, TicketCreate } from "../components";
 import { authProvider } from "../lib/authProvider";
 
 import PostIcon from "@mui/icons-material/Book";
@@ -31,6 +31,11 @@ const App = () => (
       edit={TicketEdit} 
       create={TicketCreate} 
       icon={PostIcon}
+    /> 
+
+    <Resource 
+      name="albums" 
+      list={AlbumList}
     /> 
 
   </Admin>
