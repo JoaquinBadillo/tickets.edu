@@ -2,6 +2,7 @@ import { AuthProvider } from "react-admin";
 
 export const authProvider: AuthProvider = {
     login: ({ username }) => {
+        
         localStorage.setItem("username", username);
         return Promise.resolve();
     },

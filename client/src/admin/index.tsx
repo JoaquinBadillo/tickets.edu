@@ -1,5 +1,15 @@
 import { Admin, Resource, ShowGuesser } from "react-admin";
-import { AlbumList, Dashboard, UserList, TicketList, TicketEdit, TicketCreate } from "../components";
+
+import { 
+  AlbumList, 
+  Dashboard,
+  LoginPage, 
+  TicketList, 
+  TicketEdit, 
+  TicketCreate, 
+  UserList, 
+} from "../components";
+
 import { authProvider } from "../lib/authProvider";
 
 import PostIcon from "@mui/icons-material/Book";
@@ -15,6 +25,7 @@ const App = () => (
     authProvider={authProvider} 
     dataProvider={dataProvider} 
     dashboard={Dashboard}
+    loginPage={LoginPage}
   >
     <Resource 
       name="users" 

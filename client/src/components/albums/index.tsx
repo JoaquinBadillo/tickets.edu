@@ -1,9 +1,9 @@
 import {
-    List,
+    EditButton,
     Datagrid,
+    List,
     TextField,
-    ReferenceField,
-    EditButton
+    ReferenceField
 } from 'react-admin';
 
 export const AlbumList = () => (
