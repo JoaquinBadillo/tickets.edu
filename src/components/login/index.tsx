@@ -1,31 +1,30 @@
 /* MUI */
-import Avatar from '@mui/icons-material/Person';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import InputAdornment from '@mui/material/InputAdornment';
-import Link from '@mui/material/Link';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import TextField from '@mui/material/TextField';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from "@mui/icons-material/Person";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import InputAdornment from "@mui/material/InputAdornment";
+import Link from "@mui/material/Link";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import TextField from "@mui/material/TextField";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 /* React Stuff */
-import { useState } from 'react';
-import { useLogin, useNotify } from 'react-admin';
-import { FormEventHandler } from 'react';
+import { useState } from "react";
+import { useLogin, useNotify } from "react-admin";
+import { FormEventHandler } from "react";
 
 /* Custom Components */
 import { Logo } from "../icons/logo";
 
 import "./style.css";
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const login = useLogin();
     const notify = useNotify();
 
@@ -33,7 +32,7 @@ export default function SignIn() {
         e.preventDefault();
         login({ email, password })
         .catch(() =>
-            notify('Invalid email or password')
+            notify("Invalid email or password")
         );
     };
 
@@ -44,9 +43,9 @@ export default function SignIn() {
             <Box
               sx={{
                 marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
 
@@ -93,7 +92,7 @@ export default function SignIn() {
                   value={password}
                 />
 
-                <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', mt: 4}}>
+                <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column", mt: 4}}>
                     <Link href="#" variant="body2">
                       Recuperar contraseña
                     </Link>

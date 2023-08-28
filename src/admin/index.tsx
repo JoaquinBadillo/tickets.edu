@@ -12,8 +12,9 @@ import {
 
 import { authProvider } from "../lib/authProvider";
 
-import PostIcon from "@mui/icons-material/Book";
+import TicketIcon from "@mui/icons-material/ReceiptLong";
 import UserIcon from "@mui/icons-material/Group";
+import SummaryIcon from "@mui/icons-material/BarChart";
 
 
 import jsonServerProvider from "ra-data-json-server";
@@ -27,27 +28,34 @@ const App = () => (
     dashboard={Dashboard}
     loginPage={LoginPage}
   >
-    <Resource 
-      name="users" 
-      list={UserList} 
-      recordRepresentation="name" 
-      show={ShowGuesser}
-      icon={UserIcon}
-    />
+    {permissions => (
+      <>
+        { permissions === "admin" &&
+          <Resource 
+            name="users" 
+            list={UserList} 
+            recordRepresentation="name" 
+            show={ShowGuesser}
+            icon={UserIcon}
+          />
+        }
       
-    {/* Change to tickets -> Requires API endpoint */}
-    <Resource 
-      name="posts" 
-      list={TicketList} 
-      edit={TicketEdit} 
-      create={TicketCreate} 
-      icon={PostIcon}
-    /> 
+        <Resource 
+          name="posts" 
+          list={TicketList} 
+          edit={TicketEdit} 
+          create={TicketCreate} 
+          icon={TicketIcon}
+        /> 
 
-    <Resource 
-      name="albums" 
-      list={AlbumList}
-    /> 
+        <Resource 
+          name="albums" 
+          list={AlbumList}
+          icon={SummaryIcon}
+        /> 
+      </>
+    )}
+    
 
   </Admin>
 );
