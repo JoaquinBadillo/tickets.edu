@@ -10,7 +10,8 @@ import {
     SelectInput,
     SimpleForm,
     TextField, 
-    TextInput
+    TextInput,
+    usePermissions
 } from "react-admin";
 
 import { Box } from "@mui/system";
@@ -23,16 +24,20 @@ import { postFilters } from "./utils";
 
 const defaultTheme = createTheme();
 
-export const TicketList = () => (
-    <List filters={postFilters}>
-        <Datagrid rowClick="edit">
-            <TextField source="id" />
-            <ReferenceField source="userId" reference="users" link="show" />
-            <TextField source="title" />
-            <EditButton />
-        </Datagrid>
-    </List>
-);
+export const TicketList = () => {
+    const { permissions } = usePermissions();
+    return (
+        <List filters={postFilters}>
+            <Datagrid>
+                <TextField source="id" />
+                { permissions === "admin" && 
+                  <ReferenceField source="userId" reference="users" link="show" /> }
+                <TextField source="title" />
+                <EditButton />
+            </Datagrid>
+        </List>
+    );
+};
 
 export const TicketEdit = () => (
     <Edit title = {<PostTitle />}>
