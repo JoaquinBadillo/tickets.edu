@@ -1,5 +1,5 @@
 import { Dashboard } from "./dashboard";
-import { UserList } from "../components/users";
+import { UserList, UserEdit, UserCreate } from "../components/users";
 import { TicketList, TicketEdit, TicketCreate } from "../components/tickets";
 import { AlbumList } from "./albums";
 import LoginPage from "./login";
@@ -11,5 +11,7 @@ export {
     TicketList, 
     TicketEdit, 
     TicketCreate,
-    UserList
+    UserList,
+    UserEdit,
+    UserCreate
 };
