@@ -39,38 +39,40 @@ export const TicketList = () => {
     );
 };
 
-export const TicketEdit = () => (
-    <Edit title = {<PostTitle />}>
-        <ThemeProvider theme={defaultTheme}>
-            <SimpleForm>
-                <CardHeader 
-                    title="Editar Ticket"
-                    titleTypographyProps={{fontWeight: "bold"}}
-                />
+export const TicketEdit = () => {
+    return (
+        <Edit title = {<PostTitle />}>
+            <ThemeProvider theme={defaultTheme}>
+                <SimpleForm warnWhenUnsavedChanges>
+                    <CardHeader 
+                        title="Editar Ticket"
+                        titleTypographyProps={{fontWeight: "bold"}}
+                    />
 
-                <ReferenceInput label="user" source="userId" reference="users">
-                    <SelectInput disabled />
-                </ReferenceInput>
+                    <ReferenceInput label="user" source="userId" reference="users">
+                        <SelectInput disabled />
+                    </ReferenceInput>
 
-                <TextInput 
-                    source="title" 
-                    sx={{minWidth: "300px", width: "60%", }}
-                />
+                    <TextInput 
+                        source="title" 
+                        sx={{minWidth: "300px", width: "60%", }}
+                    />
 
-                <TextInput 
-                    source="body" 
-                    multiline rows={5}
-                    sx={{minWidth: "300px", width: "80%",}}
-                />
-            </SimpleForm>
-        </ThemeProvider>
-    </Edit>
-);
+                    <TextInput 
+                        source="body" 
+                        multiline rows={5}
+                        sx={{minWidth: "300px", width: "80%",}}
+                    />
+                </SimpleForm>
+            </ThemeProvider>
+        </Edit>
+    );
+};
 
 export const TicketCreate = () => (
     <Create title="Levantar Titcket">
         <ThemeProvider theme={defaultTheme}>
-            <SimpleForm>
+            <SimpleForm warnWhenUnsavedChanges>
                 <CardHeader 
                     title="Nuevo Ticket"
                     titleTypographyProps={{fontWeight: "bold"}}
