@@ -8,6 +8,8 @@ import {
   TicketEdit, 
   TicketCreate, 
   UserList, 
+  UserEdit,
+  UserCreate
 } from "../components";
 
 import { authProvider } from "../lib/authProvider";
@@ -33,9 +35,11 @@ const App = () => (
         { permissions === "admin" &&
           <Resource 
             name="users" 
-            list={UserList} 
+            list={UserList}
+            edit={UserEdit}
             recordRepresentation="name" 
             show={ShowGuesser}
+            create={UserCreate} 
             icon={UserIcon}
           />
         }
@@ -56,7 +60,6 @@ const App = () => (
       </>
     )}
     
-
   </Admin>
 );
 
