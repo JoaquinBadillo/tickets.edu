@@ -11,7 +11,6 @@ import {
     TextInput
 } from "react-admin";
 
-import UrlField from "./urlField";
 import { useMediaQuery, Theme} from "@mui/material";
 
 import { UserTitle } from "./hooks";
@@ -36,8 +35,6 @@ export const UserList = () => {
                     <TextField source="id" />
                     <TextField source="name" />
                     <EmailField source="email" />
-                    <TextField source="phone" />
-                    <UrlField source="website" />
                     <EditButton />
                 </Datagrid>
             )}
@@ -56,10 +53,7 @@ export const UserEdit = () => {
                     />
 
                     <TextInput source="name" />
-                    <TextInput source="phone" />
                     <TextInput source="email"  />
-                    <TextInput source="website" />
-                    
                 </SimpleForm>
             </ThemeProvider>
         </Edit>
@@ -72,9 +66,7 @@ export const UserCreate = () => {
             <ThemeProvider theme={defaultTheme}>
                 <SimpleForm warnWhenUnsavedChanges>
                     <TextInput source="name" />
-                    <TextInput source="phone" />
                     <TextInput source="email" />
-                    <TextInput source="website" />
                 </SimpleForm>
             </ThemeProvider>
         </Create>
