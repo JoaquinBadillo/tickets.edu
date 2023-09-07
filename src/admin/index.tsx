@@ -18,10 +18,12 @@ import TicketIcon from "@mui/icons-material/ReceiptLong";
 import UserIcon from "@mui/icons-material/Group";
 import SummaryIcon from "@mui/icons-material/BarChart";
 
+import i18nProvider from "../lib/language";
 
-import jsonServerProvider from "ra-data-json-server";
+import simpleRestProvider from "ra-data-simple-rest";
 
-const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
+
+const dataProvider = simpleRestProvider("http://127.0.0.1:1337/api");
 
 const App = () => (
   <Admin 
@@ -29,6 +31,7 @@ const App = () => (
     dataProvider={dataProvider} 
     dashboard={Dashboard}
     loginPage={LoginPage}
+    i18nProvider={i18nProvider}
   >
     {permissions => (
       <>
@@ -41,11 +44,12 @@ const App = () => (
             show={ShowGuesser}
             create={UserCreate} 
             icon={UserIcon}
+            options={{ label: "Usuarios" }}
           />
         }
       
         <Resource 
-          name="posts" 
+          name="tickets" 
           list={TicketList} 
           edit={TicketEdit} 
           create={TicketCreate} 
@@ -56,6 +60,7 @@ const App = () => (
           name="albums" 
           list={AlbumList}
           icon={SummaryIcon}
+          options={{ label: "Reporte" }}
         /> 
       </>
     )}

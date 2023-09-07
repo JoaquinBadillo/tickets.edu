@@ -49,17 +49,19 @@ export const TicketEdit = () => {
                         titleTypographyProps={{fontWeight: "bold"}}
                     />
 
-                    <ReferenceInput label="user" source="userId" reference="users">
-                        <SelectInput disabled />
+                    <ReferenceInput label="Usuario" source="userId" reference="users">
+                        <SelectInput label="Usuario" disabled />
                     </ReferenceInput>
 
                     <TextInput 
                         source="title" 
+                        label="Título"
                         sx={{minWidth: "300px", width: "60%", }}
                     />
 
                     <TextInput 
-                        source="body" 
+                        source="description"
+                        label="Descripción" 
                         multiline rows={5}
                         sx={{minWidth: "300px", width: "80%",}}
                     />
