@@ -1,4 +1,5 @@
-import { Admin, Resource, ShowGuesser } from "react-admin";
+import { Admin, CustomRoutes, Resource, ShowGuesser } from "react-admin";
+import { Route } from "react-router-dom";
 
 import { 
   AlbumList, 
@@ -7,6 +8,7 @@ import {
   TicketList, 
   TicketEdit, 
   TicketCreate, 
+  ReportDashboard,
   UserList, 
   UserEdit,
   UserCreate
@@ -57,11 +59,17 @@ const App = () => (
         /> 
 
         <Resource 
-          name="albums" 
+          name="reports" 
           list={AlbumList}
           icon={SummaryIcon}
           options={{ label: "Reporte" }}
-        /> 
+        />
+
+        { permissions === "admin" &&
+          <CustomRoutes>
+            <Route path="/reports" element={<ReportDashboard />} />
+          </CustomRoutes>
+        } 
       </>
     )}
     

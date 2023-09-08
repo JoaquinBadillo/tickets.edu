@@ -1,0 +1,31 @@
+.custom-tooltip {
+    border-radius: 10px;
+    background-color: #f1f1f1df;
+    min-width: 100px;
+    text-align: center;
+    line-height: 1;
+    padding: 1px 0;
+}
+
+.custom-tooltip .title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    padding: 1px 0;
+}
+
+.text {
+    color: #000000;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    align-items: center;
+}
+
+.chart-container .chart-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
