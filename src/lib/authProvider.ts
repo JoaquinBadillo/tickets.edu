@@ -1,32 +1,64 @@
 import { AuthProvider } from "react-admin";
 
+const url = "http://127.0.0.1:1337";
+
 export const authProvider: AuthProvider = {
-    login: ({ email }) => {
-        localStorage.setItem("email", email);
-        return Promise.resolve();
-    },
+  login: async ({ email, password }) => {
+    const request = new Request(`${url}/api/users/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
 
-    logout: () => {
-        localStorage.removeItem("email");
-        return Promise.resolve();
-    },
+      headers: new Headers({ "Content-Type": "application/json" }),
+    });
 
-    checkError: ({ status }: { status: number}) => {
-        if (status == 401 || status == 403) {
-            localStorage.removeItem("email");
-            return Promise.reject();
-        }
+    try {
+      const response = await fetch(request);
 
-        return Promise.resolve();
-    },
+      if (response.status < 200 || response.status >= 300)
+        throw new Error(response.statusText);
 
-    checkAuth: () => {
-        return (localStorage.getItem("email") ?
-            Promise.resolve() : Promise.reject());
+      const parsed = await response.json();
+      localStorage.setItem("token", parsed.token);
+      return Promise.resolve();
+    } catch {
+      throw new Error("Error en el login");
+    }
+  },
 
-    },
+  logout: () => {
+    localStorage.removeItem("token");
+    return Promise.resolve();
+  },
 
-    getPermissions: () => Promise.resolve(() => {
-        return localStorage.getItem("email") === "admin" ? "admin" : "user";
-    })
+  checkAuth: () => {
+    return localStorage.getItem("token") ? Promise.resolve() : Promise.reject();
+  },
+
+  checkError: ({ status }: { status: number }) => {
+    if (status == 401 || status == 403) {
+      localStorage.removeItem("auth");
+      return Promise.reject();
+    }
+
+    return Promise.resolve();
+  },
+
+  getIdentity: () => {
+    try {
+      return Promise.resolve(JSON.parse(localStorage.getItem("identity")));
+    } catch {
+      return Promise.reject();
+    }
+  },
+
+  getPermissions: () => {
+    try {
+      return Promise.resolve("admin");
+    } catch {
+      return Promise.reject();
+    }
+  },
 };
