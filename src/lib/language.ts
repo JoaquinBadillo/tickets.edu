@@ -50,7 +50,7 @@ const spanishMessages: TranslationMessages = {
       sign_in: "Iniciar Sesión",
       sign_in_error: "La autenticación falló",
       user_menu: "Perfil",
-      username: "Usuario"
+      username: "Usuario",
     },
     boolean: {
       true: "Sí",
@@ -62,24 +62,24 @@ const spanishMessages: TranslationMessages = {
         upload_several:
           "Arrastre algunos archivos para subir o haga clic para seleccionarlos.",
         upload_single:
-          "Arrastre un archivo para subir o haga clic para seleccionarlo."
+          "Arrastre un archivo para subir o haga clic para seleccionarlo.",
       },
       image: {
         upload_several:
           "Arrastre algunas imagénes para subir o haga clic para seleccionarlas.",
         upload_single:
-          "Arrastre alguna imagen para subir o haga clic para seleccionarla."
+          "Arrastre alguna imagen para subir o haga clic para seleccionarla.",
       },
       references: {
         all_missing: "No se encontraron datos de referencias.",
         many_missing:
           "Al menos una de las referencias asociadas parece no estar disponible.",
-        single_missing: "La referencia asociada no parece estar disponible."
+        single_missing: "La referencia asociada no parece estar disponible.",
       },
       password: {
         toggle_visible: "Mostrar contraseña",
-        toggle_hidden: "Ocultar contraseña"
-      }
+        toggle_hidden: "Ocultar contraseña",
+      },
     },
     message: {
       about: "Acerca de",
@@ -91,21 +91,20 @@ const spanishMessages: TranslationMessages = {
       delete_content: "¿Seguro que quiere eliminar este item?",
       delete_title: "Eliminar %{name} #%{id}",
       details: "Detalles",
-      error:
-        "Se produjo un error y su solicitud no se pudo completar",
+      error: "Se produjo un error y su solicitud no se pudo completar",
       invalid_form:
         "El formulario no es válido. Por favor verifique si hay errores",
       loading: "La página se está cargando, espere un momento por favor",
       no: "No",
-      not_found:
-        "Recurso no encontrado",
+      not_found: "Recurso no encontrado",
       yes: "Sí",
       unsaved_changes:
         "Sus cambios no han sido guardados. ¿Está seguro que quiere ignorarlos?",
       auth_error: "Error de autenticación",
-      bulk_update_content: "Actualizar masivamente este %{name}? |||| Actualizar masivamente estos %{smart_count} items?",
+      bulk_update_content:
+        "Actualizar masivamente este %{name}? |||| Actualizar masivamente estos %{smart_count} items?",
       bulk_update_title: "Actualizar masivamente",
-      clear_array_input: "Vaciar"
+      clear_array_input: "Vaciar",
     },
     navigation: {
       next: "Siguiente",
@@ -124,7 +123,7 @@ const spanishMessages: TranslationMessages = {
       page: "Página",
       first: "Primero",
       last: "Último",
-      previous: "Anterior"
+      previous: "Anterior",
     },
     sort: {
       sort_by: "Ordenar por %{field} %{order}",
@@ -145,19 +144,19 @@ const spanishMessages: TranslationMessages = {
         "Elemento actualizado |||| %{smart_count} elementos actualizados",
       i18n_error:
         "No se pudieron cargar las traducciones para el idioma especificado",
-      not_authorized: "No autorizado"
+      not_authorized: "No autorizado",
     },
     page: {
       create: "Crear %{name}",
       dashboard: "Tablero",
       edit: "%{name} #%{id}",
-      empty: "Sin %{name} todavía.",
+      empty: "No tiene ningún %{name} todavía.",
       error: "Algo salió mal",
-      invite: "¿Quiere agregar una?",
+      invite: "¿Quiere agregar entradas?",
       list: "Lista de %{name}",
       loading: "Cargando",
       not_found: "No encontrado",
-      show: "%{name} #%{id}"
+      show: "%{name} #%{id}",
     },
     validation: {
       email: "Debe ser un correo electrónico válido",
@@ -168,7 +167,7 @@ const spanishMessages: TranslationMessages = {
       number: "Debe ser un número",
       oneOf: "Debe ser uno de: %{options}",
       regex: "Debe coincidir con un formato específico (regexp): %{pattern}",
-      required: "Requerido"
+      required: "Requerido",
     },
     saved_queries: {
       label: "Consultas guardadas",
@@ -180,8 +179,8 @@ const spanishMessages: TranslationMessages = {
       remove_label_with_name: "Eliminar consulta %{name}",
       remove_message: "Eliminar consulta %{name}?",
       help: "¿Necesita ayuda?",
-    }
-  }
+    },
+  },
 };
 
 const i18nProvider = polyglotI18nProvider(() => spanishMessages); // Default locale

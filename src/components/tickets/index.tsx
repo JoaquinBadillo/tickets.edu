@@ -1,6 +1,7 @@
 import { 
     Create,
     Datagrid,
+    DateField,
     Edit, 
     EditButton, 
     List, 
@@ -29,7 +30,7 @@ export const TicketList = () => {
     return (
         <List filters={postFilters}>
             <Datagrid>
-                <TextField source="id" />
+                <DateField source="date" />
                 { permissions === "admin" && 
                   <ReferenceField source="userId" reference="users" link="show" /> }
                 <TextField source="title" />

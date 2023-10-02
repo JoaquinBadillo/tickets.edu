@@ -4,9 +4,11 @@ import {
     Edit, 
     EditButton, 
     EmailField,
-    List, 
+    List,
+    Show,
     SimpleList,
     SimpleForm,
+    SimpleShowLayout,
     TextField, 
     TextInput
 } from "react-admin";
@@ -32,9 +34,9 @@ export const UserList = () => {
                 />
             ) : (
                 <Datagrid rowClick="show">
-                    <TextField source="id" />
-                    <TextField source="name" />
+                    <TextField source="name" label="Nombre"/>
                     <EmailField source="email" />
+                    <TextField source="role" label="Permisos" />
                     <EditButton />
                 </Datagrid>
             )}
@@ -73,3 +75,12 @@ export const UserCreate = () => {
     );
 
 };
+
+export const UserShow = () => (
+    <Show>
+        <SimpleShowLayout>
+            <TextField source="name" />
+            <TextField source="email" />
+        </SimpleShowLayout>
+    </Show>
+);

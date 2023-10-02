@@ -1,4 +1,4 @@
-import { Admin, CustomRoutes, Resource, ShowGuesser } from "react-admin";
+import { Admin, CustomRoutes, Resource } from "react-admin";
 import { Route } from "react-router-dom";
 
 import { 
@@ -11,7 +11,8 @@ import {
   ReportDashboard,
   UserList, 
   UserEdit,
-  UserCreate
+  UserCreate,
+  UserShow
 } from "../components";
 
 import { authProvider } from "../lib/authProvider";
@@ -22,10 +23,10 @@ import SummaryIcon from "@mui/icons-material/BarChart";
 
 import i18nProvider from "../lib/language";
 
-import simpleRestProvider from "ra-data-simple-rest";
+import restProvider from "../lib/dataProvider";
 
 
-const dataProvider = simpleRestProvider("http://127.0.0.1:1337/api");
+const dataProvider = restProvider("http://127.0.0.1:1337/api");
 
 const App = () => (
   <Admin 
@@ -43,7 +44,7 @@ const App = () => (
             list={UserList}
             edit={UserEdit}
             recordRepresentation="name" 
-            show={ShowGuesser}
+            show={UserShow}
             create={UserCreate} 
             icon={UserIcon}
             options={{ label: "Usuarios" }}
