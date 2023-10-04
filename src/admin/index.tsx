@@ -1,18 +1,18 @@
 import { Admin, CustomRoutes, Resource } from "react-admin";
 import { Route } from "react-router-dom";
 
-import { 
-  AlbumList, 
+import {
+  AlbumList,
   Dashboard,
-  LoginPage, 
-  TicketList, 
-  TicketEdit, 
-  TicketCreate, 
+  LoginPage,
+  TicketList,
+  TicketEdit,
+  TicketCreate,
   ReportDashboard,
-  UserList, 
+  UserList,
   UserEdit,
   UserCreate,
-  UserShow
+  UserShow,
 } from "../components";
 
 import { authProvider } from "../lib/authProvider";
@@ -25,55 +25,55 @@ import i18nProvider from "../lib/language";
 
 import restProvider from "../lib/dataProvider";
 
-
-const dataProvider = restProvider("http://127.0.0.1:1337/api");
+const dataProvider = restProvider(
+  import.meta.env.API_URL || "http://127.0.0.1:1337/api",
+);
 
 const App = () => (
-  <Admin 
-    authProvider={authProvider} 
-    dataProvider={dataProvider} 
+  <Admin
+    authProvider={authProvider}
+    dataProvider={dataProvider}
     dashboard={Dashboard}
     loginPage={LoginPage}
     i18nProvider={i18nProvider}
   >
-    {permissions => (
+    {(permissions) => (
       <>
-        { permissions === "admin" &&
-          <Resource 
-            name="users" 
+        {permissions === "admin" && (
+          <Resource
+            name="users"
             list={UserList}
             edit={UserEdit}
-            recordRepresentation="name" 
+            recordRepresentation="name"
             show={UserShow}
-            create={UserCreate} 
+            create={UserCreate}
             icon={UserIcon}
             options={{ label: "Usuarios" }}
           />
-        }
-      
-        <Resource 
-          name="tickets" 
-          list={TicketList} 
-          edit={TicketEdit} 
-          create={TicketCreate} 
-          icon={TicketIcon}
-        /> 
+        )}
 
-        <Resource 
-          name="reports" 
+        <Resource
+          name="tickets"
+          list={TicketList}
+          edit={TicketEdit}
+          create={TicketCreate}
+          icon={TicketIcon}
+        />
+
+        <Resource
+          name="reports"
           list={AlbumList}
           icon={SummaryIcon}
           options={{ label: "Reporte" }}
         />
 
-        { permissions === "admin" &&
+        {permissions === "admin" && (
           <CustomRoutes>
             <Route path="/reports" element={<ReportDashboard />} />
           </CustomRoutes>
-        } 
+        )}
       </>
     )}
-    
   </Admin>
 );
 
