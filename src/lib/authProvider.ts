@@ -22,11 +22,7 @@ export const authProvider: AuthProvider = {
         throw new Error(response.statusText);
 
       const parsed = await response.json();
-      localStorage.setItem("token", parsed.token);
-      localStorage.setItem(
-        "identity",
-        JSON.stringify({ id: parsed.id, key: parsed.token }),
-      );
+      localStorage.setItem("token", parsed.auth);
       return Promise.resolve();
     } catch {
       throw new Error("Error en el login");
