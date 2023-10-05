@@ -45,6 +45,7 @@ const spanishMessages: TranslationMessages = {
     },
     auth: {
       auth_check_error: "Por favor inicie sesión para continuar",
+      invalid_email_or_password: "Credenciales inválidas",
       logout: "Cerrar Sesión",
       password: "Contraseña",
       sign_in: "Iniciar Sesión",
@@ -83,6 +84,7 @@ const spanishMessages: TranslationMessages = {
     },
     message: {
       about: "Acerca de",
+      invalid_email_or_password: "Credenciales inválidas",
       are_you_sure: "¿Está seguro?",
       bulk_delete_content:
         "¿Seguro que quiere eliminar este %{name}? |||| ¿Seguro que quiere eliminar estos %{smart_count} items?",
@@ -131,6 +133,7 @@ const spanishMessages: TranslationMessages = {
       DESC: "descendente",
     },
     notification: {
+      invalid_email_or_password: "Credenciales inválidas",
       bad_item: "Elemento incorrecto",
       canceled: "Acción cancelada",
       created: "Elemento creado",
