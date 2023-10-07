@@ -60,17 +60,15 @@ const App = () => (
           icon={TicketIcon}
         />
 
-        <Resource
-          name="reports"
-          list={AlbumList}
-          icon={SummaryIcon}
-          options={{ label: "Reporte" }}
-        />
-
         {permissions === "admin" && (
-          <CustomRoutes>
-            <Route path="/reports" element={<ReportDashboard />} />
-          </CustomRoutes>
+          <>
+            <Resource
+              name="reports"
+              list={<ReportDashboard />}
+              icon={SummaryIcon}
+              options={{ label: "Reporte" }}
+            />
+          </>
         )}
       </>
     )}

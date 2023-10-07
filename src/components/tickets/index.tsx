@@ -30,10 +30,10 @@ export const TicketList = () => {
     return (
         <List filters={postFilters}>
             <Datagrid>
-                <DateField source="date" />
+                <DateField source="date" label="Fecha" />
                 { permissions === "admin" && 
-                  <ReferenceField source="userId" reference="users" link="show" /> }
-                <TextField source="title" />
+                  <ReferenceField source="userId" reference="users" link="show" label="Usuario" /> }
+                <TextField source="title" label="Título" />
                 <EditButton />
             </Datagrid>
         </List>
@@ -97,9 +97,9 @@ export const TicketCreate = () => (
                     sx={{minWidth: "300px", width: "60%", }}
                     validate={required()}
                     choices={[
-                        { id: "open", name: "Abierto" }
+                        { id: "Open", name: "Abierto" }
                     ]}
-                    defaultValue={"open"}
+                    defaultValue={"Open"}
                     disabled
                 />
 
@@ -134,8 +134,8 @@ export const TicketCreate = () => (
 
                     <SelectInput 
                         source="incident"
-                        title="Tipo de Incidente" 
-                        label="Tipo de Incidente" 
+                        title="Incidente" 
+                        label="Incidente" 
                         choices={[
                             { id: "mantenimiento", name: "Mantenimiento" },
                             { id: "limpieza", name: "Limpieza" },
