@@ -28,19 +28,18 @@ import { postFilters } from "./utils";
 const defaultTheme = createTheme();
 
 export const TicketList = () => {
-  const { permissions } = usePermissions();
-  return (
-    <List filters={postFilters}>
-      <Datagrid>
-        <DateField source="date" />
-        {permissions === "admin" && (
-          <ReferenceField source="userId" reference="users" link="show" />
-        )}
-        <TextField source="title" />
-        <EditButton />
-      </Datagrid>
-    </List>
-  );
+    const { permissions } = usePermissions();
+    return (
+        <List filters={postFilters}>
+            <Datagrid>
+                <DateField source="date" label="Fecha" />
+                { permissions === "admin" && 
+                  <ReferenceField source="userId" reference="users" link="show" label="Usuario" /> }
+                <TextField source="title" label="Título" />
+                <EditButton />
+            </Datagrid>
+        </List>
+    );
 };
 
 export const TicketEdit = () => {
@@ -165,36 +164,47 @@ export const TicketCreate = () => {
             titleTypographyProps={{ fontWeight: "bold" }}
           />
 
-          <TextInput
-            source="titulo"
-            title="Título"
-            resettable
-            sx={{ minWidth: "300px", width: "60%" }}
-            validate={required()}
-          />
+                <TextInput 
+                    source="title" 
+                    title="Título"
+                    label="Título"
+                    resettable 
+                    sx={{minWidth: "300px", width: "60%", }}
+                    validate={required()}
+                />
 
-          <Box
-            sx={{
-              minWidth: "300px",
-              width: "60%",
-              flexDirection: "row",
-              flexWrap: "true",
-            }}
-          >
-            <SelectInput
-              source="prioridad"
-              choices={[
-                { id: "alto", name: "Alto" },
-                { id: "intermedio", name: "Intermedio" },
-                { id: "bajo", name: "Bajo" },
-              ]}
-              defaultValue={"bajo"}
-              validate={required()}
-              sx={{ mr: "10px", my: 0 }}
-            />
+                <SelectInput 
+                    source="status" 
+                    title="Estado"
+                    label="Estado"
+                    sx={{minWidth: "300px", width: "60%", }}
+                    validate={required()}
+                    choices={[
+                        { id: "Open", name: "Abierto" }
+                    ]}
+                    defaultValue={"Open"}
+                    disabled
+                />
+
+                <Box sx={{minWidth: "300px", width: "60%", flexDirection: "row", flexWrap: "true"}}>
+                    <SelectInput 
+                        source="priority"
+                        title="Prioridad"
+                        label="Prioridad"
+                        choices={[
+                            { id: "alta", name: "Alta" },
+                            { id: "media", name: "Media" },
+                            { id: "baja", name: "Baja" },
+                        ]}
+                        defaultValue={"baja"}
+                        validate={required()}
+                        sx={{mr: "10px", my: 0}}
+                    />
 
             <SelectInput
-              source="clasificacion"
+              source="category"
+              title="Clasificación"
+              label="Clasificación"
               choices={[
                 { id: "servicios", name: "Servicios" },
                 { id: "digital", name: "Digital" },
@@ -217,21 +227,22 @@ export const TicketCreate = () => {
             <SelectInput
               source="incidente"
               title="Tipo de Incidencia"
+              label="Incidente"
               choices={clasificacionDict[clasificacion]}
               validate={required()}
               sx={{ mr: "10px", my: 0 }}
             />
           </Box>
 
-          <TextInput
-            source="asunto"
-            multiline
-            rows={5}
-            sx={{ minWidth: "300px", width: "80%" }}
-            validate={required()}
-          />
-        </SimpleForm>
-      </ThemeProvider>
+                <TextInput 
+                    source="description"
+                    title="Descripción"
+                    label="Descripción"
+                    multiline rows={5} 
+                    sx={{minWidth: "300px", width: "80%",}}
+                    validate={required()}
+                />
+            </SimpleForm>
+        </ThemeProvider>
     </Create>
-  );
-};
+);
