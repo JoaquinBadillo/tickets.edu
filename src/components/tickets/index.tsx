@@ -30,10 +30,10 @@ export const TicketList = () => {
     return (
         <List filters={postFilters}>
             <Datagrid>
-                <DateField source="date" />
+                <DateField source="date" label="Fecha" />
                 { permissions === "admin" && 
-                  <ReferenceField source="userId" reference="users" link="show" /> }
-                <TextField source="title" />
+                  <ReferenceField source="userId" reference="users" link="show" label="Usuario" /> }
+                <TextField source="title" label="Título" />
                 <EditButton />
             </Datagrid>
         </List>
@@ -82,16 +82,32 @@ export const TicketCreate = () => (
                 />
 
                 <TextInput 
-                    source="titulo" 
+                    source="title" 
                     title="Título"
+                    label="Título"
                     resettable 
                     sx={{minWidth: "300px", width: "60%", }}
                     validate={required()}
                 />
 
+                <SelectInput 
+                    source="status" 
+                    title="Estado"
+                    label="Estado"
+                    sx={{minWidth: "300px", width: "60%", }}
+                    validate={required()}
+                    choices={[
+                        { id: "Open", name: "Abierto" }
+                    ]}
+                    defaultValue={"Open"}
+                    disabled
+                />
+
                 <Box sx={{minWidth: "300px", width: "60%", flexDirection: "row", flexWrap: "true"}}>
                     <SelectInput 
-                        source="prioridad" 
+                        source="priority"
+                        title="Prioridad"
+                        label="Prioridad"
                         choices={[
                             { id: "alta", name: "Alta" },
                             { id: "media", name: "Media" },
@@ -103,7 +119,9 @@ export const TicketCreate = () => (
                     />
 
                     <SelectInput 
-                        source="categoria"
+                        source="category"
+                        title="Categoría"
+                        label="Categoría"
                         choices={[
                             { id: "interno", name: "Interno" },
                             { id: "beneficiarios", name: "Beneficiarios" },
@@ -115,8 +133,9 @@ export const TicketCreate = () => (
                     />
 
                     <SelectInput 
-                        source="incidente"
-                        title="Tipo de Incidente" 
+                        source="incident"
+                        title="Incidente" 
+                        label="Incidente" 
                         choices={[
                             { id: "mantenimiento", name: "Mantenimiento" },
                             { id: "limpieza", name: "Limpieza" },
@@ -128,10 +147,24 @@ export const TicketCreate = () => (
                         validate={required()}
                         sx={{mr: "10px", my: 0}}
                     />
+
+                    <SelectInput
+                        source="location"
+                        title="Ubicación"
+                        label="Ubicación"
+                        choices={[
+                            { id: "sf", name: "Santa Fe" },
+                            { id: "tol", name: "Toluca" }
+                        ]}
+                        validate={required()}
+                        sx={{mr: "10px", my: 0}}
+                    />
                 </Box>
 
                 <TextInput 
-                    source="asunto" 
+                    source="description"
+                    title="Descripción"
+                    label="Descripción"
                     multiline rows={5} 
                     sx={{minWidth: "300px", width: "80%",}}
                     validate={required()}
