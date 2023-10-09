@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { AuthProvider } from "react-admin";
 
-const url = import.meta.env.VITE_API_URL || "http://127.0.0.1:1337";
+const url = import.meta.env.VITE_API_URL || "http://127.0.0.1:1337/api";
 
 export const authProvider: AuthProvider = {
   login: async ({ email, password }) => {
@@ -31,7 +31,6 @@ export const authProvider: AuthProvider = {
 
   logout: () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("identity");
     return Promise.resolve();
   },
 
@@ -42,7 +41,6 @@ export const authProvider: AuthProvider = {
   checkError: ({ status }: { status: number }) => {
     if (status == 401 || status == 403) {
       localStorage.removeItem("token");
-      localStorage.removeItem("identity");
       return Promise.reject();
     }
 
