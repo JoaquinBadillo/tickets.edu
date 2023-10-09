@@ -153,8 +153,6 @@ export const TicketCreate = () => {
     setClasificacion(event.target.value);
   };
 
-  console.log(clasificacionDict[clasificacion]);
-
   return (
     <Create title="Levantar Titcket">
       <ThemeProvider theme={defaultTheme}>
@@ -225,24 +223,37 @@ export const TicketCreate = () => {
             />
 
             <SelectInput
-              source="incidente"
+              source="incident"
               title="Tipo de Incidencia"
               label="Incidente"
               choices={clasificacionDict[clasificacion]}
               validate={required()}
               sx={{ mr: "10px", my: 0 }}
             />
+
+            <SelectInput
+              source="location"
+              title="Ubicación"
+              label="Ubicación"
+              choices={[
+                  { id: "sf", name: "Santa Fe" },
+                  { id: "tol", name: "Toluca" }
+              ]}
+              validate={required()}
+              sx={{mr: "10px", my: 0}}
+            />
           </Box>
 
-                <TextInput 
-                    source="description"
-                    title="Descripción"
-                    label="Descripción"
-                    multiline rows={5} 
-                    sx={{minWidth: "300px", width: "80%",}}
-                    validate={required()}
-                />
-            </SimpleForm>
+          <TextInput 
+              source="description"
+              title="Descripción"
+              label="Descripción"
+              multiline rows={5} 
+              sx={{minWidth: "300px", width: "80%",}}
+              validate={required()}
+          />
+          
+          </SimpleForm>
         </ThemeProvider>
     </Create>
   );
