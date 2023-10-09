@@ -1,10 +1,11 @@
+// @ts-nocheck
 import { AuthProvider } from "react-admin";
 
-const url = import.meta.env.API_URL || "http://127.0.0.1:1337";
+const url = import.meta.env.VITE_API_URL || "http://127.0.0.1:1337/api";
 
 export const authProvider: AuthProvider = {
   login: async ({ email, password }) => {
-    const request = new Request(`${url}/api/users/login`, {
+    const request = new Request(`${url}/users/login`, {
       method: "POST",
       body: JSON.stringify({
         email: email,
@@ -21,7 +22,7 @@ export const authProvider: AuthProvider = {
         throw new Error(response.statusText);
 
       const parsed = await response.json();
-      localStorage.setItem("token", parsed.token);
+      localStorage.setItem("token", parsed.auth);
       return Promise.resolve();
     } catch {
       throw new Error("Error en el login");
@@ -39,7 +40,7 @@ export const authProvider: AuthProvider = {
 
   checkError: ({ status }: { status: number }) => {
     if (status == 401 || status == 403) {
-      localStorage.removeItem("auth");
+      localStorage.removeItem("token");
       return Promise.reject();
     }
 

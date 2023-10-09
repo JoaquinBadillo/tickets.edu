@@ -3,9 +3,19 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
 
+
+const fetchJsonUtil = (url, options={})=>{
+    if(!options.headers){
+        options.headers=new Headers({Accept: "application/json"})
+    }
+    options.headers.set("Authentication", localStorage.getItem("token"));
+    return fetchUtils.fetchJson(url, options);
+};
+
+
 export default (
     apiUrl: string,
-    httpClient = fetchUtils.fetchJson,
+    httpClient = fetchJsonUtil,
     countHeader: string = 'Content-Range'
 ): DataProvider => ({
     getList: (resource, params) => {
