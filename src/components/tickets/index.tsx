@@ -139,7 +139,7 @@ export const clasificacionDict: IClasificacionDict = {
     { id: "papeleria", name: "Papelería" },
     { id: "limpieza_materiales", name: "Materiales de Limpieza" },
   ],
-  fenomenoMeteorologico: [
+  fenomeno_meteorologico: [
     { id: "inundaciones", name: "Inundaciones" },
     { id: "incendios", name: "Incendios" },
     { id: "sismos", name: "Sismos" },
@@ -245,4 +245,5 @@ export const TicketCreate = () => {
             </SimpleForm>
         </ThemeProvider>
     </Create>
-);
+  );
+}
