@@ -1,4 +1,4 @@
-import UbicationTickets from "./charts/ticket-status";
+import UbicationStatus from "./charts/ubication";
 import TicketStatus from "./charts/ticket-status";
 
 import { 
@@ -18,7 +18,7 @@ export function ReportDashboard() {
 
           <CardHeader title="Reporte por ubicación" />
           <CardContent>
-            < UbicationTickets/>
+            < UbicationStatus/>
           </CardContent>
 
         </Card>

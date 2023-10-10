@@ -15,28 +15,37 @@ interface Response {
 export const UbicationTickets = (path: string) => {
   const res: Response = {};
 
-  const { data, isLoading, error } = useGetList(path);
+  const { data, isLoading, error } = useGetList(
+    path,
+    {
+      pagination: {page: 1, perPage: 10},
+      sort: {field: "date", order: "DESC"}
+    }
+  );
 
-  if (isLoading) {
+  if (isLoading) 
     res.loading = true;
-  } else if (error || data == null) {
+
+  else if (error || data == null)
     res.error = error;
-  } else if (data) {
-    const ubicationData: UbicationData[] = [
+  
+    else if (data) {
+    const ubicationData = [
       { location: "Santa Fe", numberOfTickets: 0 },
       { location: "Toluca", numberOfTickets: 0 },
     ];
 
     for (const item of data) {
-      if (item.location === "Santa Fe") {
+    if (item.location === "Santa Fe")
         ubicationData[0].numberOfTickets += 1;
-      } else if (item.location === "Toluca") {
+    else if (item.location === "Toluca") 
         ubicationData[1].numberOfTickets += 1;
-      }
     }
-
+    
     res.data = ubicationData;
+    
   }
 
-  return res;
+    return res;
+  
 };
