@@ -14,7 +14,7 @@ import {
     NameType,
 } from "recharts/types/component/DefaultTooltipContent";
 
-import { TicketStatusState } from "./hooks/pieChart";
+import { UbicationTickets } from "./hooks/pieChart3";
 import { Loading } from "react-admin";
 import { useMediaQuery, Theme} from "@mui/material";
 
@@ -26,7 +26,7 @@ const COLORS = ["#AEE256", "#5668E2", "#A66BC4"];
 
 export default function TicketPieChart() {
   const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
-  const res = TicketStatusState("reports");
+  const res = UbicationTickets("reports");
 
   if (res.loading) return <Loading />;
   if (res.error || res.data == null) return <p>ERROR</p>;
@@ -36,8 +36,8 @@ export default function TicketPieChart() {
       <h2 className='chart-title'>Estado de los Tickets</h2>
       {
         isSmall ?
-          <TicketStatusSmall data={res.data}/> :
-          <TicketStatus data={res.data}/> 
+          <UbicationStatusSmall data={res.data}/> :
+          <UbicationStatus data={res.data}/> 
       }
     </Box>
   );
@@ -48,7 +48,7 @@ interface IReport {
   value: number;
 }
 
-const TicketStatus = ({data}: {data: IReport[]}) => (
+const UbicationStatus = ({data}: {data: IReport[]}) => (
     <ResponsiveContainer width='40%' minWidth={400} height={300}>
         <PieChart 
           width={400} 
@@ -84,7 +84,7 @@ const TicketStatus = ({data}: {data: IReport[]}) => (
     </ResponsiveContainer>
 );
 
-const TicketStatusSmall = ({data}: {data: IReport[]}) => (
+const UbicationStatusSmall = ({data}: {data: IReport[]}) => (
   <ResponsiveContainer width='99%' height={300}>
       <PieChart
         width={300}
