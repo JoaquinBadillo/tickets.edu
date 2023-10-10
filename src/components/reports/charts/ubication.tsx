@@ -58,7 +58,7 @@ const UbicationStatus = ({data}: {data: IReport[]}) => (
         >
           <Tooltip content={<CustomTooltip />}/>
           <Legend 
-            formatter={(value) => <span className="text">Tickets {value}</span>}
+            formatter={(value) => <span className="text">Locación: {value}</span>}
             layout="vertical" 
             verticalAlign="top" 
             align="right"
@@ -93,7 +93,7 @@ const UbicationStatusSmall = ({data}: {data: IReport[]}) => (
       >
         <Tooltip content={<CustomTooltip />}/>
         <Legend 
-          formatter={(value) => <span className="text">Tickets {value}</span>}
+          formatter={(value) => <span className="text">Locación: {value}</span>}
           layout="horizontal" 
           verticalAlign="bottom" 
           align="center"

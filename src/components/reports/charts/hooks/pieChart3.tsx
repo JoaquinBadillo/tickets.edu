@@ -2,8 +2,8 @@
 import { useGetList } from "react-admin";
 
 interface UbicationData {
-  location: string;
-  numberOfTickets: number;
+  name: string;
+  value: number;
 }
 
 interface Response {
@@ -31,15 +31,15 @@ export const UbicationTickets = (path: string) => {
   
     else if (data) {
     const ubicationData = [
-      { location: "Santa Fe", numberOfTickets: 0 },
-      { location: "Toluca", numberOfTickets: 0 },
+      { name: "Santa Fe", value: 0 },
+      { name: "Toluca", value: 0 },
     ];
 
     for (const item of data) {
     if (item.location === "Santa Fe")
-        ubicationData[0].numberOfTickets += 1;
+        ubicationData[0].value += 1;
     else if (item.location === "Toluca") 
-        ubicationData[1].numberOfTickets += 1;
+        ubicationData[1].value += 1;
     }
     
     res.data = ubicationData;
