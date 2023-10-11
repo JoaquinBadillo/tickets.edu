@@ -1,6 +1,6 @@
 import {
+  Button,
   Create,
-  Datagrid,
   DateField,
   Edit,
   EditButton,
@@ -21,7 +21,10 @@ import {
   FilterButton,
   CreateButton,
   ExportButton,
+  useRecordContext,
 } from "react-admin";
+
+import {useFormContext} from "react-hook-form";
 
 import { useState } from "react";
 
@@ -31,7 +34,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
 
 import { PostTitle } from "./hooks";
-import { postFilters } from "./utils";
+import { postFilters, UpdateStatus } from "./utils";
 
 const defaultTheme = createTheme();
 
@@ -66,6 +69,43 @@ export const TicketList = () => {
   );
 };
 
+export const SelectStatus = () => {
+  const record = useRecordContext();
+  if (!record)
+    return null;
+
+  let choices = [
+    { id: "Cerrado", name: "Cerrado" },
+    { id: "En Progreso", name: "En Progreso" },
+    { id: "Abierto", name: "Abierto" },
+  ];
+
+  const [status, setStatus] = useState(record.status);
+
+  if (status === "En Progreso")
+    choices.pop();
+
+  if (status === "Closed")
+    choices = [{ id: "Cerrado", name: "Cerrado" }];
+
+  const isClosed = status === "Cerrado";
+
+  return (
+    <SelectInput
+      validate={required()}
+      source="status"
+      label="Status"
+      defaultValue={status}
+      onChange={(e) => {
+        setStatus(e.target.value);
+      }}
+      choices={choices}
+      disabled={isClosed}
+      sx={{paddingLeft: "10px"}}
+    /> 
+  );
+}
+
 export const TicketEdit = () => {
   return (
     <Edit title={<PostTitle />}>
@@ -76,25 +116,22 @@ export const TicketEdit = () => {
             titleTypographyProps={{ fontWeight: "bold" }}
           />
 
-          <ReferenceInput label="Usuario" source="userId" reference="users">
-            <SelectInput label="Usuario" disabled />
-          </ReferenceInput>
+          <Box>
+            <ReferenceInput label="Usuario" source="userId" reference="users">
+              <SelectInput label="Usuario" disabled />
+            </ReferenceInput>
 
-          <SelectInput
-            source="status"
-            label="Status"
-            choices={[
-              { id: "Abierto", name: "Abierto" },
-              { id: "En Progreso", name: "En Progreso" },
-              { id: "Cerrado", name: "Cerrado" },
-            ]}
-          />
+            <SelectStatus />
+          </Box>
+          
 
           <TextInput
             source="title"
             label="Título"
             sx={{ minWidth: "300px", width: "60%" }}
           />
+
+          
 
           <TextInput
             source="description"
