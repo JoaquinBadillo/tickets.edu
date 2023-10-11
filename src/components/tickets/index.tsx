@@ -10,9 +10,17 @@ import {
   required,
   SelectInput,
   SimpleForm,
+  SimpleShowLayout,
   TextField,
   TextInput,
   usePermissions,
+  Show,
+  DatagridConfigurable,
+  TopToolbar,
+  SelectColumnsButton,
+  FilterButton,
+  CreateButton,
+  ExportButton,
 } from "react-admin";
 
 import { useState } from "react";
@@ -27,19 +35,35 @@ import { postFilters } from "./utils";
 
 const defaultTheme = createTheme();
 
+const TicketColumnActions = () => (
+  <TopToolbar>
+    <SelectColumnsButton />
+    <FilterButton />
+    <CreateButton />
+    <ExportButton />
+  </TopToolbar>
+);
+
 export const TicketList = () => {
-    const { permissions } = usePermissions();
-    return (
-        <List filters={postFilters}>
-            <Datagrid>
-                <DateField source="date" label="Fecha" />
-                { permissions === "admin" && 
-                  <ReferenceField source="userId" reference="users" link="show" label="Usuario" /> }
-                <TextField source="title" label="Título" />
-                <EditButton />
-            </Datagrid>
-        </List>
-    );
+  const { permissions } = usePermissions();
+  return (
+    <List filters={postFilters} actions={<TicketColumnActions />}>
+      <DatagridConfigurable rowClick="show">
+        <DateField source="date" label="Fecha" />
+        <TextField source="title" label="Título" />
+        {permissions === "admin" && (
+          <ReferenceField
+            source="userId"
+            reference="users"
+            link="show"
+            label="Usuario"
+          />
+        )}
+        <TextField source="id" label="ID" />
+        <EditButton label="Edit" />
+      </DatagridConfigurable>
+    </List>
+  );
 };
 
 export const TicketEdit = () => {
@@ -55,6 +79,16 @@ export const TicketEdit = () => {
           <ReferenceInput label="Usuario" source="userId" reference="users">
             <SelectInput label="Usuario" disabled />
           </ReferenceInput>
+
+          <SelectInput
+            source="status"
+            label="Status"
+            choices={[
+              { id: "Abierto", name: "Abierto" },
+              { id: "En Progreso", name: "En Progreso" },
+              { id: "Cerrado", name: "Cerrado" },
+            ]}
+          />
 
           <TextInput
             source="title"
@@ -107,7 +141,7 @@ export const clasificacionDict: IClasificacionDict = {
     { id: "puertas", name: "Puertas" },
     { id: "aulas_en_general", name: "Aulas en general" },
   ],
-  recursosHumanos: [
+  recursos_humanos: [
     { id: "permisos", name: "Permisos" },
     { id: "asistencias", name: "Asistencias" },
     { id: "salud", name: "Salud" },
@@ -153,8 +187,6 @@ export const TicketCreate = () => {
     setClasificacion(event.target.value);
   };
 
-  console.log(clasificacionDict[clasificacion]);
-
   return (
     <Create title="Levantar Titcket">
       <ThemeProvider theme={defaultTheme}>
@@ -164,42 +196,47 @@ export const TicketCreate = () => {
             titleTypographyProps={{ fontWeight: "bold" }}
           />
 
-                <TextInput 
-                    source="title" 
-                    title="Título"
-                    label="Título"
-                    resettable 
-                    sx={{minWidth: "300px", width: "60%", }}
-                    validate={required()}
-                />
+          <TextInput
+            source="title"
+            title="Título"
+            label="Título"
+            resettable
+            sx={{ minWidth: "300px", width: "60%" }}
+            validate={required()}
+          />
 
-                <SelectInput 
-                    source="status" 
-                    title="Estado"
-                    label="Estado"
-                    sx={{minWidth: "300px", width: "60%", }}
-                    validate={required()}
-                    choices={[
-                        { id: "Open", name: "Abierto" }
-                    ]}
-                    defaultValue={"Open"}
-                    disabled
-                />
+          <SelectInput
+            source="status"
+            title="Estado"
+            label="Estado"
+            sx={{ minWidth: "300px", width: "60%" }}
+            validate={required()}
+            choices={[{ id: "Abierto", name: "Abierto" }]}
+            defaultValue={"Abierto"}
+            disabled
+          />
 
-                <Box sx={{minWidth: "300px", width: "60%", flexDirection: "row", flexWrap: "true"}}>
-                    <SelectInput 
-                        source="priority"
-                        title="Prioridad"
-                        label="Prioridad"
-                        choices={[
-                            { id: "alta", name: "Alta" },
-                            { id: "media", name: "Media" },
-                            { id: "baja", name: "Baja" },
-                        ]}
-                        defaultValue={"baja"}
-                        validate={required()}
-                        sx={{mr: "10px", my: 0}}
-                    />
+          <Box
+            sx={{
+              minWidth: "300px",
+              width: "60%",
+              flexDirection: "row",
+              flexWrap: "true",
+            }}
+          >
+            <SelectInput
+              source="priority"
+              title="Prioridad"
+              label="Prioridad"
+              choices={[
+                { id: "alta", name: "Alta" },
+                { id: "media", name: "Media" },
+                { id: "baja", name: "Baja" },
+              ]}
+              defaultValue={"baja"}
+              validate={required()}
+              sx={{ mr: "10px", my: 0 }}
+            />
 
             <SelectInput
               source="category"
@@ -225,25 +262,51 @@ export const TicketCreate = () => {
             />
 
             <SelectInput
-              source="incidente"
+              source="incident"
               title="Tipo de Incidencia"
               label="Incidente"
               choices={clasificacionDict[clasificacion]}
               validate={required()}
               sx={{ mr: "10px", my: 0 }}
             />
+
+            <SelectInput
+              source="location"
+              title="Ubicación"
+              label="Ubicación"
+              choices={[
+                { id: "sf", name: "Santa Fe" },
+                { id: "tol", name: "Toluca" },
+              ]}
+              validate={required()}
+              sx={{ mr: "10px", my: 0 }}
+            />
           </Box>
 
-                <TextInput 
-                    source="description"
-                    title="Descripción"
-                    label="Descripción"
-                    multiline rows={5} 
-                    sx={{minWidth: "300px", width: "80%",}}
-                    validate={required()}
-                />
-            </SimpleForm>
-        </ThemeProvider>
+          <TextInput
+            source="description"
+            title="Descripción"
+            label="Descripción"
+            multiline
+            rows={5}
+            sx={{ minWidth: "300px", width: "80%" }}
+            validate={required()}
+          />
+        </SimpleForm>
+      </ThemeProvider>
     </Create>
   );
-}
+};
+
+export const TicketShow = () => (
+  <Show>
+    <SimpleShowLayout>
+      <TextField source="title" />
+      <TextField source="status" />
+      <TextField source="priority" />
+      <TextField source="category" />
+      <TextField source="incident" />
+      <TextField source="description" />
+    </SimpleShowLayout>
+  </Show>
+);
