@@ -1,5 +1,4 @@
 import {
-  Button,
   Create,
   DateField,
   Edit,
@@ -22,9 +21,9 @@ import {
   CreateButton,
   ExportButton,
   useRecordContext,
+  Toolbar,
+  SaveButton,
 } from "react-admin";
-
-import {useFormContext} from "react-hook-form";
 
 import { useState } from "react";
 
@@ -33,8 +32,8 @@ import { Box } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
 
-import { PostTitle } from "./hooks";
-import { postFilters, UpdateStatus } from "./utils";
+import { TicketTitle } from "./hooks";
+import { TicketFilters } from "./utils";
 
 const defaultTheme = createTheme();
 
@@ -50,9 +49,10 @@ const TicketColumnActions = () => (
 export const TicketList = () => {
   const { permissions } = usePermissions();
   return (
-    <List filters={postFilters} actions={<TicketColumnActions />}>
-      <DatagridConfigurable rowClick="show">
+    <List filters={TicketFilters} actions={<TicketColumnActions />}>
+      <DatagridConfigurable rowClick="show" bulkActionButtons={false}>
         <DateField source="date" label="Fecha" />
+        <DateField source="last_update" label="Última Actualización" />
         <TextField source="title" label="Título" />
         {permissions === "admin" && (
           <ReferenceField
@@ -62,7 +62,7 @@ export const TicketList = () => {
             label="Usuario"
           />
         )}
-        <TextField source="id" label="ID" />
+        <TextField source="id" label="Id" />
         <EditButton label="Edit" />
       </DatagridConfigurable>
     </List>
@@ -106,11 +106,17 @@ export const SelectStatus = () => {
   );
 }
 
+const TicketEditToolbar = (props?: any) => (
+  <Toolbar {...props} >
+      <SaveButton />
+  </Toolbar>
+);
+
 export const TicketEdit = () => {
   return (
-    <Edit title={<PostTitle />}>
+    <Edit>
       <ThemeProvider theme={defaultTheme}>
-        <SimpleForm warnWhenUnsavedChanges>
+        <SimpleForm toolbar={<TicketEditToolbar />} warnWhenUnsavedChanges>
           <CardHeader
             title="Editar Ticket"
             titleTypographyProps={{ fontWeight: "bold" }}
@@ -124,7 +130,6 @@ export const TicketEdit = () => {
             <SelectStatus />
           </Box>
           
-
           <TextInput
             source="title"
             label="Título"
@@ -336,14 +341,14 @@ export const TicketCreate = () => {
 };
 
 export const TicketShow = () => (
-  <Show>
+  <Show title={<TicketTitle />}>
     <SimpleShowLayout>
-      <TextField source="title" />
-      <TextField source="status" />
-      <TextField source="priority" />
-      <TextField source="category" />
-      <TextField source="incident" />
-      <TextField source="description" />
+      <TextField source="title" label="Título" />
+      <TextField source="status" label="Estado" />
+      <TextField source="priority" label="Prioridad" />
+      <TextField source="category" label="Categoría" />
+      <TextField source="incident" label="Incidente" />
+      <TextField source="description" label="Descripción" component="pre" />
     </SimpleShowLayout>
   </Show>
 );
