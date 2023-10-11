@@ -23,23 +23,19 @@ export const UbicationTickets = (path: string) => {
     }
   );
 
-  if (isLoading) 
-    res.loading = true;
+  if (isLoading) res.loading = true;
 
-  else if (error || data == null)
-    res.error = error;
+  else if (error || data == null) res.error = error;
   
-    else if (data) {
+  else if (data) {
     const ubicationData = [
       { name: "Santa Fe", value: 0 },
       { name: "Toluca", value: 0 },
     ];
 
     for (const item of data) {
-    if (item.location === "Santa Fe")
-        ubicationData[0].value += 1;
-    else if (item.location === "Toluca") 
-        ubicationData[1].value += 1;
+      if (item.location === "Santa Fe") ubicationData[0].value += 1;
+      else if (item.location === "Toluca") ubicationData[1].value += 1;
     }
     
     res.data = ubicationData;
