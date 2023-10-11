@@ -1,6 +1,7 @@
 import { TranslationMessages } from "ra-core";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 
+//@ts-nocheck
 const spanishMessages: TranslationMessages = {
   ra: {
     action: {
@@ -148,6 +149,8 @@ const spanishMessages: TranslationMessages = {
       i18n_error:
         "No se pudieron cargar las traducciones para el idioma especificado",
       not_authorized: "No autorizado",
+      not_found: "Recurso no disponible",
+      "": "Recuro no encontrado"
     },
     page: {
       create: "Crear %{name}",
@@ -171,6 +174,7 @@ const spanishMessages: TranslationMessages = {
       oneOf: "Debe ser uno de: %{options}",
       regex: "Debe coincidir con un formato específico (regexp): %{pattern}",
       required: "Requerido",
+      not_found: "Recurso no encontrado"
     },
     saved_queries: {
       label: "Consultas guardadas",
@@ -183,7 +187,32 @@ const spanishMessages: TranslationMessages = {
       remove_message: "Eliminar consulta %{name}?",
       help: "¿Necesita ayuda?",
     },
-  },
+    configurable: {
+      customize: "Personalizar",
+      configureMode: "Modo de configuración",
+      inspector: {
+          title: "Título",
+          content: "Contenido",
+          reset: "Reiniciar",
+          hideAll: "Ocultar todo",
+          showAll: "Mostrar todo",
+      },
+      Datagrid: {
+          title: "Título",
+          unlabeled: "Sin Etiqueta",
+      },
+      SimpleForm: {
+          title: "Título",
+          unlabeled: "Sin etiqueta",
+      },
+      SimpleList: {
+          title: "Título",
+          primaryText: "Texto Primario",
+          secondaryText: "Texto Secundario",
+          tertiaryText: "Texto Terciario",
+      },
+    },
+  }
 };
 
 const i18nProvider = polyglotI18nProvider(() => spanishMessages); // Default locale

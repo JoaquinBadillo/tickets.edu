@@ -1,6 +1,6 @@
 import { TextInput, ReferenceInput } from "react-admin";
 
-export const postFilters = [
+export const TicketFilters = [
     <TextInput source="q" label="Search" alwaysOn />,
-    <ReferenceInput source="userId" label="User" reference="users" />
+    <ReferenceInput source="userId" label="Usuario" reference="users" />
 ];
