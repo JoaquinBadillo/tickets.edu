@@ -80,15 +80,15 @@ export const SelectStatus = () => {
     { id: "Abierto", name: "Abierto" },
   ];
 
-  const [status, setStatus] = useState(record.status);
-
-  if (status === "En Progreso")
+  if (record.status === "En Progreso")
     choices.pop();
 
-  if (status === "Closed")
+  else if (record.status === "Cerrado") {
     choices = [{ id: "Cerrado", name: "Cerrado" }];
+  }
 
-  const isClosed = status === "Cerrado";
+
+  const isClosed = record.status === "Cerrado";
 
   return (
     <SelectInput
@@ -96,9 +96,6 @@ export const SelectStatus = () => {
       source="status"
       label="Status"
       defaultValue={status}
-      onChange={(e) => {
-        setStatus(e.target.value);
-      }}
       choices={choices}
       disabled={isClosed}
       sx={{paddingLeft: "10px"}}
