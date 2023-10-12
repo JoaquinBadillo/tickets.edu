@@ -95,7 +95,7 @@ export const SelectStatus = () => {
       validate={required()}
       source="status"
       label="Status"
-      defaultValue={status}
+      defaultValue={record.status}
       choices={choices}
       disabled={isClosed}
       sx={{paddingLeft: "10px"}}
@@ -153,74 +153,74 @@ interface IClasificacionDict {
 }
 // Declaración de clasificación & tipo de incidencia para Tickets
 export const clasificacionDict: IClasificacionDict = {
-  servicios: [
-    { id: "agua", name: "Agua" },
-    { id: "luz", name: "Luz" },
-    { id: "telefono", name: "Teléfono" },
-    { id: "basura", name: "Basura" },
-    { id: "limpieza_del_aula", name: "Limpieza del Aula" },
+  "Servicios": [
+    { id: "Agua", name: "Agua" },
+    { id: "Luz", name: "Luz" },
+    { id: "Teléfono", name: "Teléfono" },
+    { id: "Basura", name: "Basura" },
+    { id: "Limpieza del Aula", name: "Limpieza del Aula" },
   ],
-  digital: [
+  "Digital": [
     {
-      id: "internet_servidores_equipos",
-      name: "Internet, Servidores y Equipos",
+      id: "Internet servidores equipos",
+      name: "Internet, servidores y equipos",
     },
-    { id: "software", name: "Software" },
-    { id: "hardware", name: "Hardware" },
-    { id: "camaras_de_seguridad", name: "Cámaras de seguridad" },
+    { id: "Software", name: "Software" },
+    { id: "Hardware", name: "Hardware" },
+    { id: "Cámaras de Seguridad", name: "Cámaras de seguridad" },
     {
-      id: "soporte_tecnico_presencial_remoto",
+      id: "Soporte técnico presencial remoto",
       name: "Soporte técnico presencial y remoto",
     },
   ],
-  infraestructura: [
-    { id: "paredes", name: "Paredes" },
-    { id: "techo", name: "Techo" },
-    { id: "ventanas", name: "Ventanas" },
-    { id: "puertas", name: "Puertas" },
-    { id: "aulas_en_general", name: "Aulas en general" },
+  "Infraestructura": [
+    { id: "Paredes", name: "Paredes" },
+    { id: "Techo", name: "Techo" },
+    { id: "Ventanas", name: "Ventanas" },
+    { id: "Puertas", name: "Puertas" },
+    { id: "Aulas en general", name: "Aulas en general" },
   ],
-  recursos_humanos: [
-    { id: "permisos", name: "Permisos" },
-    { id: "asistencias", name: "Asistencias" },
-    { id: "salud", name: "Salud" },
-    { id: "tramites", name: "Trámites" },
-    { id: "honorarios", name: "Honorarios" },
+  "Recursos Humanos": [
+    { id: "Permisos", name: "Permisos" },
+    { id: "Asistencias", name: "Asistencias" },
+    { id: "Salud", name: "Salud" },
+    { id: "Trámites", name: "Trámites" },
+    { id: "Honorarios", name: "Honorarios" },
   ],
-  beneficiarios: [
-    { id: "asistencias_beneficiarios", name: "Asistencias" },
-    { id: "documentacion", name: "Documentación" },
-    { id: "apoyo_academico", name: "Apoyo académico" },
-    { id: "salud_beneficiarios", name: "Salud" },
-    { id: "seguridad_bulling", name: "Seguridad, bulling" },
+  "Beneficiarios": [
+    { id: "Asistencias", name: "Asistencias" },
+    { id: "Documentación", name: "Documentación" },
+    { id: "Apoyo académico", name: "Apoyo académico" },
+    { id: "Salud", name: "Salud" },
+    { id: "Seguridad, bullying", name: "Seguridad, bulling" },
   ],
-  mobiliario: [
-    { id: "sillas_butacas", name: "Sillas, butacas" },
-    { id: "escritorios", name: "Escritorios" },
-    { id: "pizarrones", name: "Pizarrones" },
-    { id: "cafeteria", name: "Cafetería" },
-    { id: "etantes_archiveros", name: "Estantes, archiveros" },
+  "Mobiliario": [
+    { id: "Sillas, butacas", name: "Sillas, butacas" },
+    { id: "Escritorios", name: "Escritorios" },
+    { id: "Pizarrones", name: "Pizarrones" },
+    { id: "Cafeteria", name: "Cafetería" },
+    { id: "Estantes, archiveros", name: "Estantes, archiveros" },
   ],
-  seguridad: [
-    { id: "delincuencia", name: "Delincuencia" },
-    { id: "robos", name: "Robos" },
-    { id: "bandalismo", name: "Bandalismo" },
-    { id: "imagen_institucional", name: "Imagen institucional" },
+  "Seguridad": [
+    { id: "Delincuencia", name: "Delincuencia" },
+    { id: "Robos", name: "Robos" },
+    { id: "Bandalismo", name: "Bandalismo" },
+    { id: "Imagen institucional", name: "Imagen institucional" },
   ],
-  materiales: [
-    { id: "educativos", name: "Materiales Educativos" },
-    { id: "papeleria", name: "Papelería" },
-    { id: "limpieza_materiales", name: "Materiales de Limpieza" },
+  "Materiales": [
+    { id: "Educativos", name: "Materiales Educativos" },
+    { id: "Papeleria", name: "Papelería" },
+    { id: "Materiales de Limpieza", name: "Materiales de Limpieza" },
   ],
-  fenomeno_meteorologico: [
-    { id: "inundaciones", name: "Inundaciones" },
-    { id: "incendios", name: "Incendios" },
-    { id: "sismos", name: "Sismos" },
+  "Fenómenos Meteorológicos": [
+    { id: "Inundaciones", name: "Inundaciones" },
+    { id: "Incendios", name: "Incendios" },
+    { id: "Sismos", name: "Sismos" },
   ],
 };
 
 export const TicketCreate = () => {
-  const [clasificacion, setClasificacion] = useState("servicios");
+  const [clasificacion, setClasificacion] = useState("Servicios");
 
   const changeHandler = (event: any) => {
     setClasificacion(event.target.value);
@@ -268,11 +268,11 @@ export const TicketCreate = () => {
               title="Prioridad"
               label="Prioridad"
               choices={[
-                { id: "alta", name: "Alta" },
-                { id: "media", name: "Media" },
-                { id: "baja", name: "Baja" },
+                { id: "Alta", name: "Alta" },
+                { id: "Media", name: "Media" },
+                { id: "Baja", name: "Baja" },
               ]}
-              defaultValue={"baja"}
+              defaultValue={"Baja"}
               validate={required()}
               sx={{ mr: "10px", my: 0 }}
             />
@@ -282,19 +282,20 @@ export const TicketCreate = () => {
               title="Clasificación"
               label="Clasificación"
               choices={[
-                { id: "servicios", name: "Servicios" },
-                { id: "digital", name: "Digital" },
-                { id: "infraestructura", name: "Infraestructura" },
-                { id: "recursos_humanos", name: "Recursos Humanos" },
-                { id: "beneficiarios", name: "Beneficiarios" },
-                { id: "mobiliario", name: "Mobiliario" },
-                { id: "seguridad", name: "Seguridad" },
-                { id: "materiales", name: "Materiales" },
+                { id: "Servicios", name: "Servicios" },
+                { id: "Digital", name: "Digital" },
+                { id: "Infraestructura", name: "Infraestructura" },
+                { id: "Recursos Humanos", name: "Recursos Humanos" },
+                { id: "Beneficiarios", name: "Beneficiarios" },
+                { id: "Mobiliario", name: "Mobiliario" },
+                { id: "Seguridad", name: "Seguridad" },
+                { id: "Materiales", name: "Materiales" },
                 {
-                  id: "fenomeno_meteorologico",
-                  name: "Fenómeno Meteorológico",
+                  id: "Fenómenos Meteorológicos",
+                  name: "Fenómenos Meteorológicos",
                 },
               ]}
+              defaultValue={"Servicios"}
               onChange={changeHandler}
               validate={required()}
               sx={{ mr: "10px", my: 0 }}
