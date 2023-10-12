@@ -26,7 +26,7 @@ const COLORS = ["#AEE256", "#5668E2", "#A66BC4"];
 
 export default function TicketPieChart() {
   const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
-  const res = TicketStatusState("reports");
+  const res = TicketStatusState("reports/status");
 
   if (res.loading) return <Loading />;
   if (res.error || res.data == null) return <p>ERROR</p>;

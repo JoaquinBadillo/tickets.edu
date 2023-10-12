@@ -54,7 +54,7 @@ export const UserEdit = () => {
                         titleTypographyProps={{fontWeight: "bold"}}
                     />
 
-                    <TextInput source="name" />
+                    <TextInput source="name" label="Nombre" />
                     <TextInput source="email"  />
                 </SimpleForm>
             </ThemeProvider>
@@ -67,7 +67,7 @@ export const UserCreate = () => {
         <Create>
             <ThemeProvider theme={defaultTheme}>
                 <SimpleForm warnWhenUnsavedChanges>
-                    <TextInput source="name" />
+                    <TextInput source="name" label="Nombre" />
                     <TextInput source="email" />
                 </SimpleForm>
             </ThemeProvider>
@@ -79,8 +79,9 @@ export const UserCreate = () => {
 export const UserShow = () => (
     <Show>
         <SimpleShowLayout>
-            <TextField source="name" />
+            <TextField source="name" label="Nombre" />
             <TextField source="email" />
+            <TextField source="role" label="Rol" />
         </SimpleShowLayout>
     </Show>
 );
