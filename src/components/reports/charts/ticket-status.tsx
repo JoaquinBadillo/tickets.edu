@@ -22,7 +22,7 @@ import { Box } from "@mui/system";
 
 import "../styles.css";
 
-const COLORS = ["#AEE256", "#5668E2", "#A66BC4"];
+const COLORS = ["#d8be43", "#5ea73b", "#3887a1"];
 
 export default function TicketPieChart() {
   const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));

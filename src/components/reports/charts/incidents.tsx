@@ -23,12 +23,11 @@ import { Box } from "@mui/system";
 
 import "../styles.css";
 
-const COLORS = ["#ff5400", "#ff8e00", "#ffd200", "#81e650", "#00d267", "#00c0ff", "#8b48fe", "#ca41fc", "#ee82ee"];
+const COLORS = ["#cc4747", "#e17844", "#d8be43", "#5ea73b", "#3887a1", "#254b6b", "#7b4ec6", "#8d3186", "#ee82ee"];
 
 export default function TicketBarChart() {
   const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
   const res = TicketIncidentCount("reports/incidents");
-  console.log(res)
 
   if (res.loading) return <Loading />;
   if (res.error || res.data == null) return <p>ERROR</p>;
