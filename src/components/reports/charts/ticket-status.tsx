@@ -14,7 +14,6 @@ import {
     NameType,
 } from "recharts/types/component/DefaultTooltipContent";
 
-
 import { TicketStatusState } from "./hooks/pieChart";
 import { Loading } from "react-admin";
 import { useMediaQuery, Theme} from "@mui/material";
@@ -23,7 +22,7 @@ import { Box } from "@mui/system";
 
 import "../styles.css";
 
-const COLORS = ["#AEE256", "#5668E2", "#A66BC4"];
+const COLORS = ["#d8be43", "#5ea73b", "#3887a1"];
 
 export default function TicketPieChart() {
   const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
@@ -119,6 +118,7 @@ const TicketStatusSmall = ({data}: {data: IReport[]}) => (
       </PieChart>
   </ResponsiveContainer>
 );
+
 
 const CustomTooltip = ({ active, payload} : TooltipProps<ValueType, NameType>) => {
   const capitalize = (s: string) => (

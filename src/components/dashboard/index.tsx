@@ -6,5 +6,10 @@ export const Dashboard = () => (
         <CardContent>
             Welcome
         </CardContent>
+
+        <CardHeader title="Manual de usuario" />
+        <CardContent>
+            Aquí va el manual de usuario
+        </CardContent>
     </Card>
 );

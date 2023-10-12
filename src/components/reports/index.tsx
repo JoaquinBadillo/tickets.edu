@@ -1,5 +1,6 @@
-import TicketStatus from "./charts/ticket-status";
 import TicketIncident from "./charts/incidents";
+import TicketLocation from "./charts/location";
+import TicketStatus from "./charts/ticket-status";
 
 import { 
     Card, 
@@ -10,9 +11,11 @@ import {
 export function ReportDashboard() {
     return (
         <Card>
+
           <CardHeader title="Reporte Semanal" />
           <CardContent>
             <TicketStatus />
+            <TicketLocation />
             <TicketIncident />
           </CardContent>
         </Card>

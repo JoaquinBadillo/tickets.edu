@@ -1,6 +1,6 @@
 .custom-tooltip {
     border-radius: 10px;
-    background-color: #f1f1f1df;
+    background-color: #faf8f8df;
     min-width: 100px;
     text-align: center;
     line-height: 1;
@@ -12,9 +12,11 @@
     font-weight: bold;
     color: #000000;
     padding: 1px 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .text {
+    font-family: 'Times New Roman', Times, serif;
     color: #000000;
 }
 
@@ -28,4 +30,5 @@
 .chart-container .chart-title {
     font-size: 1.5rem;
     font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
 }
