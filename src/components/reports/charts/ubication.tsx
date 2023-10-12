@@ -24,10 +24,10 @@ import "../styles.css";
 
 const COLORS = ["#AEE256", "#5668E2", "#A66BC4"];
 
-export default function TicketPieChart() {
+export default function UbicationPieChart() {
   const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
   const res = UbicationTickets("reports/location");
-
+  console.log(res)
   if (res.loading) return <Loading />;
   if (res.error || res.data == null) return <p>ERROR</p>;
 
