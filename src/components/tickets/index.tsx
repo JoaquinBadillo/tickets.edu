@@ -14,7 +14,6 @@ import {
   TextInput,
   usePermissions,
   Show,
-  DatagridConfigurable,
   TopToolbar,
   SelectColumnsButton,
   FilterButton,
@@ -23,6 +22,8 @@ import {
   useRecordContext,
   Toolbar,
   SaveButton,
+  useGetList,
+  useDataProvider,
 } from "react-admin";
 
 import { useState } from "react";
@@ -31,6 +32,7 @@ import { Box } from "@mui/system";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
+import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 
 import { TicketTitle } from "./hooks";
 import { TicketFilters } from "./utils";
@@ -47,9 +49,26 @@ const TicketColumnActions = () => (
 );
 
 export const TicketList = () => {
-  const { permissions } = usePermissions();
-  return (
-    <List filters={TicketFilters} actions={<TicketColumnActions />}>
+  //const { permissions } = usePermissions();
+  const { data, isLoading, error } = useGetList("tickets", {
+    pagination: { page: 1, perPage: 10 },
+    sort: { field: "id", order: "ASC" },
+  });
+
+  if (isLoading || error) return <div>loading...</div>;
+
+  const data_test = {
+    rows: data,
+    columns: [
+      { field: "id", headerName: "ID", width: "auto" },
+      { field: "title", headerName: "Título", width: "auto" },
+      { field: "status", headerName: "Estado", width: "auto" },
+      { field: "date", headerName: "Fecha", width: "auto" },
+    ],
+  };
+
+  return <DataGrid {...data_test} />;
+  /* <List filters={TicketFilters} actions={<TicketColumnActions />}>
       <DatagridConfigurable rowClick="show" bulkActionButtons={false}>
         <DateField source="date" label="Fecha" />
         <DateField source="last_update" label="Última Actualización" />
@@ -65,14 +84,12 @@ export const TicketList = () => {
         <TextField source="id" label="Id" />
         <EditButton label="Edit" />
       </DatagridConfigurable>
-    </List>
-  );
+    </List> */
 };
 
 export const SelectStatus = () => {
   const record = useRecordContext();
-  if (!record)
-    return null;
+  if (!record) return null;
 
   let choices = [
     { id: "Cerrado", name: "Cerrado" },
@@ -80,13 +97,10 @@ export const SelectStatus = () => {
     { id: "Abierto", name: "Abierto" },
   ];
 
-  if (record.status === "En Progreso")
-    choices.pop();
-
+  if (record.status === "En Progreso") choices.pop();
   else if (record.status === "Cerrado") {
     choices = [{ id: "Cerrado", name: "Cerrado" }];
   }
-
 
   const isClosed = record.status === "Cerrado";
 
@@ -98,14 +112,14 @@ export const SelectStatus = () => {
       defaultValue={record.status}
       choices={choices}
       disabled={isClosed}
-      sx={{paddingLeft: "10px"}}
-    /> 
+      sx={{ paddingLeft: "10px" }}
+    />
   );
-}
+};
 
 const TicketEditToolbar = (props?: any) => (
-  <Toolbar {...props} >
-      <SaveButton />
+  <Toolbar {...props}>
+    <SaveButton />
   </Toolbar>
 );
 
@@ -126,14 +140,12 @@ export const TicketEdit = () => {
 
             <SelectStatus />
           </Box>
-          
+
           <TextInput
             source="title"
             label="Título"
             sx={{ minWidth: "300px", width: "60%" }}
           />
-
-          
 
           <TextInput
             source="description"
@@ -153,14 +165,14 @@ interface IClasificacionDict {
 }
 // Declaración de clasificación & tipo de incidencia para Tickets
 export const clasificacionDict: IClasificacionDict = {
-  "Servicios": [
+  Servicios: [
     { id: "Agua", name: "Agua" },
     { id: "Luz", name: "Luz" },
     { id: "Teléfono", name: "Teléfono" },
     { id: "Basura", name: "Basura" },
     { id: "Limpieza del Aula", name: "Limpieza del Aula" },
   ],
-  "Digital": [
+  Digital: [
     {
       id: "Internet servidores equipos",
       name: "Internet, servidores y equipos",
@@ -173,7 +185,7 @@ export const clasificacionDict: IClasificacionDict = {
       name: "Soporte técnico presencial y remoto",
     },
   ],
-  "Infraestructura": [
+  Infraestructura: [
     { id: "Paredes", name: "Paredes" },
     { id: "Techo", name: "Techo" },
     { id: "Ventanas", name: "Ventanas" },
@@ -187,27 +199,27 @@ export const clasificacionDict: IClasificacionDict = {
     { id: "Trámites", name: "Trámites" },
     { id: "Honorarios", name: "Honorarios" },
   ],
-  "Beneficiarios": [
+  Beneficiarios: [
     { id: "Asistencias", name: "Asistencias" },
     { id: "Documentación", name: "Documentación" },
     { id: "Apoyo académico", name: "Apoyo académico" },
     { id: "Salud", name: "Salud" },
     { id: "Seguridad, bullying", name: "Seguridad, bulling" },
   ],
-  "Mobiliario": [
+  Mobiliario: [
     { id: "Sillas, butacas", name: "Sillas, butacas" },
     { id: "Escritorios", name: "Escritorios" },
     { id: "Pizarrones", name: "Pizarrones" },
     { id: "Cafeteria", name: "Cafetería" },
     { id: "Estantes, archiveros", name: "Estantes, archiveros" },
   ],
-  "Seguridad": [
+  Seguridad: [
     { id: "Delincuencia", name: "Delincuencia" },
     { id: "Robos", name: "Robos" },
     { id: "Bandalismo", name: "Bandalismo" },
     { id: "Imagen institucional", name: "Imagen institucional" },
   ],
-  "Materiales": [
+  Materiales: [
     { id: "Educativos", name: "Materiales Educativos" },
     { id: "Papeleria", name: "Papelería" },
     { id: "Materiales de Limpieza", name: "Materiales de Limpieza" },
