@@ -27,7 +27,6 @@ const COLORS = ["#8d3186", "#ee82ee"];
 export default function TicketPieChart() {
 const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
 const res = TicketLocationCount("reports/location");
-console.log(res);
 
 if (res.loading) return <Loading />;
 if (res.error || res.data == null) return <p>ERROR</p>;

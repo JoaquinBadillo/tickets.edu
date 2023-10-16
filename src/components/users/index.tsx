@@ -25,7 +25,7 @@ const defaultTheme = createTheme();
 export const UserList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("md"));
     return (
-        <List>
+        <List pagination={false}>
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.name}
