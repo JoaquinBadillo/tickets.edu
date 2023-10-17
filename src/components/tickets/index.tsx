@@ -110,6 +110,8 @@ const TicketEditToolbar = (props?: any) => (
 );
 
 export const TicketEdit = () => {
+  const { permissions } = usePermissions();
+
   return (
     <Edit>
       <ThemeProvider theme={defaultTheme}>
@@ -120,9 +122,11 @@ export const TicketEdit = () => {
           />
 
           <Box>
-            <ReferenceInput label="Usuario" source="userId" reference="users">
-              <SelectInput label="Usuario" disabled />
-            </ReferenceInput>
+            { permissions === "admin" &&
+              (<ReferenceInput label="Usuario" source="userId" reference="users">
+                <SelectInput label="Usuario" disabled />
+              </ReferenceInput>)
+            }
 
             <SelectStatus />
           </Box>

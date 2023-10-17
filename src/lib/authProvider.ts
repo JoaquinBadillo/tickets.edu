@@ -23,25 +23,40 @@ export const authProvider: AuthProvider = {
 
       const parsed = await response.json();
       localStorage.setItem("token", parsed.auth);
+      localStorage.setItem("role", parsed.role);
       return Promise.resolve();
     } catch {
-      throw new Error("Error en el login");
+      return Promise.reject();
     }
   },
 
   logout: () => {
-    localStorage.removeItem("token");
+    if (localStorage.getItem("token"))
+      localStorage.removeItem("token");
+
+    if (localStorage.getItem("role"))
+      localStorage.removeItem("role");
+
     return Promise.resolve();
   },
 
   checkAuth: () => {
-    return localStorage.getItem("token") ? Promise.resolve() : Promise.reject();
+    return (
+      localStorage.getItem("token") && localStorage.getItem("role") ? 
+        Promise.resolve() : 
+        Promise.reject()
+    );
   },
 
   checkError: ({ status }: { status: number }) => {
-    if (status == 401 || status == 403) {
-      localStorage.removeItem("token");
-      return Promise.reject();
+    if (status == null || status == 401 || status == 403) {
+      if (localStorage.getItem("token"))
+        localStorage.removeItem("token");
+      
+      if (localStorage.getItem("role"))
+        localStorage.removeItem("role");
+
+      return Promise.reject(status ?? 401);
     }
 
     return Promise.resolve();
@@ -49,17 +64,22 @@ export const authProvider: AuthProvider = {
 
   getIdentity: () => {
     try {
-      return Promise.resolve(JSON.parse(localStorage.getItem("identity")));
+      return Promise.resolve(JSON.parse(localStorage.getItem("token")));
     } catch {
       return Promise.reject();
     }
   },
 
   getPermissions: () => {
-    try {
-      return Promise.resolve("admin");
-    } catch {
+    const role = localStorage.getItem("role");
+    
+    if (!role) {
+      if (localStorage.getItem("token")) 
+        localStorage.removeItem("token");
+
       return Promise.reject();
     }
+    
+    return Promise.resolve(role);
   },
 };
