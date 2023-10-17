@@ -133,6 +133,14 @@ export const TicketEdit = () => {
             sx={{ minWidth: "300px", width: "60%" }}
           />
 
+          <TextInput
+            source="folio"
+            label="Número de Folio"
+            multiline
+            rows={5}
+            sx={{ minWidth: "150px", width: "80%" }}
+          />
+
           
 
           <TextInput
@@ -324,6 +332,16 @@ export const TicketCreate = () => {
           </Box>
 
           <TextInput
+            source="folio"
+            title="Número de folio"
+            label="Número de folio"
+            multiline
+            rows={1}
+            sx={{ minWidth: "150px", width: "80%" }}
+            validate={required()}
+          />
+
+          <TextInput
             source="description"
             title="Descripción"
             label="Descripción"
@@ -346,6 +364,7 @@ export const TicketShow = () => (
       <TextField source="priority" label="Prioridad" />
       <TextField source="category" label="Categoría" />
       <TextField source="incident" label="Incidente" />
+      <TextField source="folio" label="Número de folio" component="pre" />
       <TextField source="description" label="Descripción" component="pre" />
     </SimpleShowLayout>
   </Show>
