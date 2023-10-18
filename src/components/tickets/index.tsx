@@ -343,6 +343,7 @@ export const TicketCreate = () => {
             rows={1}
             sx={{ minWidth: "150px", width: "80%" }}
             validate={required()}
+            defaultValue={" "}
           />
 
           <TextInput
