@@ -49,10 +49,11 @@ const TicketColumnActions = () => (
 );
 
 export const TicketList = () => {
-  //const { permissions } = usePermissions();
+  const { permissions } = usePermissions();
+
   const { data, isLoading, error } = useGetList("tickets", {
     pagination: { page: 1, perPage: 10 },
-    sort: { field: "id", order: "ASC" },
+    sort: { field: "id", order: "DESC" },
   });
 
   if (isLoading || error) return <div>loading...</div>;
@@ -60,31 +61,59 @@ export const TicketList = () => {
   const data_test = {
     rows: data,
     columns: [
-      { field: "id", headerName: "ID", width: "auto" },
-      { field: "title", headerName: "Título", width: "auto" },
-      { field: "status", headerName: "Estado", width: "auto" },
-      { field: "date", headerName: "Fecha", width: "auto" },
+      { field: "id", headerName: "ID", minWidth: 210 },
+      { field: "title", headerName: "Título", minWidth: 300 },
+      { field: "status", headerName: "Estado", minWidth: 100 },
+      { field: "date", headerName: "Fecha", minWidth: 105 },
+      /*{
+            field: "usuario",
+            headerName: "Usuario",
+            minWidth: 120,
+            renderCell: (params) => (
+              <ReferenceField
+                basePath="/tickets"
+                record={params.row}
+                source="userId"
+                reference="users"
+              >
+                <TextField source="name" />
+              </ReferenceField>
+            ),
+          },*/
+      {
+        field: "edit",
+        headerName: "Editar",
+        minWidth: 100,
+        renderCell: (params) => (
+          <EditButton basePath="/tickets" record={params.row} label="Editar" />
+        ),
+      },
     ],
   };
 
-  return <DataGrid {...data_test} />;
-  /* <List filters={TicketFilters} actions={<TicketColumnActions />}>
-      <DatagridConfigurable rowClick="show" bulkActionButtons={false}>
-        <DateField source="date" label="Fecha" />
-        <DateField source="last_update" label="Última Actualización" />
-        <TextField source="title" label="Título" />
-        {permissions === "admin" && (
-          <ReferenceField
-            source="userId"
-            reference="users"
-            link="show"
-            label="Usuario"
-          />
-        )}
-        <TextField source="id" label="Id" />
-        <EditButton label="Edit" />
-      </DatagridConfigurable>
-    </List> */
+  if (permissions === "admin") {
+    data_test.columns.push({
+      field: "usuario",
+      headerName: "Usuario",
+      minWidth: 120,
+      renderCell: (params) => (
+        <ReferenceField
+          basePath="/tickets"
+          record={params.row}
+          source="userId"
+          reference="users"
+        >
+          <TextField source="name" />
+        </ReferenceField>
+      ),
+    });
+  }
+
+  return (
+    <Box sx={{ height: "70%", width: "100%" }}>
+      <DataGrid {...data_test} />
+    </Box>
+  );
 };
 
 export const SelectStatus = () => {
