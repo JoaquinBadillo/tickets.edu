@@ -24,6 +24,8 @@ import {
   SaveButton,
   useGetList,
   useDataProvider,
+  useRedirect,
+  UrlField,
 } from "react-admin";
 
 import { useState } from "react";
@@ -59,7 +61,21 @@ export const TicketList = () => {
   const data_test = {
     rows: data,
     columns: [
-      { field: "id", headerName: "ID", minWidth: 210 },
+      {
+        field: "id",
+        headerName: "ID",
+        minWidth: 210,
+        renderCell: (params) => (
+          <ReferenceField
+            basePath="/tickets"
+            record={params.row}
+            source="id"
+            reference="tickets"
+          >
+            <UrlField source="id" href={`#/tickets/${params.row.id}/show`} />
+          </ReferenceField>
+        ),
+      },
       { field: "title", headerName: "Título", minWidth: 280 },
       { field: "status", headerName: "Estado", minWidth: 100 },
       { field: "date", headerName: "Fecha", minWidth: 105 },
@@ -74,7 +90,7 @@ export const TicketList = () => {
             source="userId"
             reference="users"
           >
-            <TextField source="name" />
+            <TextField source="user" />
           </ReferenceField>
         ),
       },
@@ -89,26 +105,6 @@ export const TicketList = () => {
       },
     ],
   };
-
-  /*
-  if (permissions === "admin") {
-    data_test.columns.push({
-      field: "usuario",
-      headerName: "Usuario",
-      minWidth: 120,
-      renderCell: (params) => (
-        <ReferenceField
-          basePath="/tickets"
-          record={params.row}
-          source="userId"
-          reference="users"
-        >
-          <TextField source="name" />
-        </ReferenceField>
-      ),
-    });
-  }
-  */
 
   return (
     <Box sx={{ height: "70%", width: "100%" }}>

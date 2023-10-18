@@ -2,7 +2,6 @@ import { Admin, CustomRoutes, Resource } from "react-admin";
 import { Route } from "react-router-dom";
 
 import {
-  AlbumList,
   Dashboard,
   LoginPage,
   TicketList,
