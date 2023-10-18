@@ -1,7 +1,8 @@
-import { Admin, CustomRoutes, Resource } from "react-admin";
+import { Admin, Resource, Layout, CustomRoutes } from "react-admin";
 import { Route } from "react-router-dom";
 
 import {
+  ChangePass,
   Dashboard,
   LoginPage,
   TicketList,
@@ -13,6 +14,7 @@ import {
   UserCreate,
   UserShow,
   TicketShow,
+  TopBar
 } from "../components";
 
 import { authProvider } from "../lib/authProvider";
@@ -29,6 +31,11 @@ const dataProvider = restProvider(
   import.meta.env.VITE_API_URL || "http://127.0.0.1:1337/api"
 );
 
+const CustomLayout = (props: any) => (
+  <Layout {...props} appBar={TopBar} sx={{margin: 0}} />
+);
+
+
 const App = () => (
   <Admin
     authProvider={authProvider}
@@ -36,6 +43,7 @@ const App = () => (
     dashboard={Dashboard}
     loginPage={LoginPage}
     i18nProvider={i18nProvider}
+    layout={CustomLayout}
   >
     {(permissions) => (
       <>
@@ -71,6 +79,10 @@ const App = () => (
             />
           </>
         )}
+
+        <CustomRoutes>
+          <Route path="/change-password" element={<ChangePass />} />
+        </CustomRoutes>
       </>
     )}
   </Admin>
