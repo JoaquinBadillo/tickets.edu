@@ -1,9 +1,7 @@
 import {
   Create,
-  DateField,
   Edit,
   EditButton,
-  List,
   ReferenceField,
   ReferenceInput,
   required,
@@ -15,15 +13,12 @@ import {
   usePermissions,
   Show,
   TopToolbar,
-  SelectColumnsButton,
-  FilterButton,
   CreateButton,
   ExportButton,
   useRecordContext,
   Toolbar,
   SaveButton,
   useGetList,
-  useDataProvider,
 } from "react-admin";
 
 import { useState } from "react";
@@ -32,10 +27,9 @@ import { Box } from "@mui/system";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
-import { DataGrid, GridRowsProp, GridColDef, esES } from "@mui/x-data-grid";
+import { DataGrid, esES } from "@mui/x-data-grid";
 
 import { TicketTitle } from "./hooks";
-import { TicketFilters } from "./utils";
 
 const defaultTheme = createTheme();
 
@@ -54,22 +48,26 @@ export const TicketList = () => {
     sort: { field: "id", order: "DESC" },
   });
 
-  if (isLoading || error) return <div>loading...</div>;
+  if (!data || isLoading || error) return <div>loading...</div>;
 
-  const data_test = {
+  const content: any = {
     rows: data,
     columns: [
       { field: "id", headerName: "ID", minWidth: 210 },
       { field: "title", headerName: "Título", minWidth: 280 },
       { field: "status", headerName: "Estado", minWidth: 100 },
       { field: "date", headerName: "Fecha", minWidth: 105 },
-      permissions === "admin" && {
+      { field: "folio", headerName: "Folio", minWidth: 150 }
+    ],
+  };
+
+  if (permissions === "admin") {
+    content.columns.push({
         field: "usuario",
         headerName: "Usuario",
         minWidth: 120,
-        renderCell: (params) => (
+        renderCell: (params: any) => (
           <ReferenceField
-            basePath="/tickets"
             record={params.row}
             source="userId"
             reference="users"
@@ -77,43 +75,22 @@ export const TicketList = () => {
             <TextField source="name" />
           </ReferenceField>
         ),
-      },
-      { field: "folio", headerName: "Folio", minWidth: 150 },
-      {
-        field: "edit",
-        headerName: "Editar",
-        minWidth: 100,
-        renderCell: (params) => (
-          <EditButton basePath="/tickets" record={params.row} label="Editar" />
-        ),
-      },
-    ],
-  };
-
-  /*
-  if (permissions === "admin") {
-    data_test.columns.push({
-      field: "usuario",
-      headerName: "Usuario",
-      minWidth: 120,
-      renderCell: (params) => (
-        <ReferenceField
-          basePath="/tickets"
-          record={params.row}
-          source="userId"
-          reference="users"
-        >
-          <TextField source="name" />
-        </ReferenceField>
-      ),
     });
   }
-  */
+
+  content.columns.push({
+    field: "edit",
+    headerName: "Editar",
+    minWidth: 100,
+    renderCell: (params: any) => (
+      <EditButton record={params.row} label="Editar" />
+    )
+  });
 
   return (
     <Box sx={{ height: "70%", width: "100%" }}>
       <TicketColumnActions />
-      <DataGrid {...data_test} localeText={esES.components.MuiDataGrid.defaultProps.localeText}/>
+      <DataGrid {...content}  localeText={esES.components.MuiDataGrid.defaultProps.localeText}/>
     </Box>
   );
 };
