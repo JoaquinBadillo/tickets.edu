@@ -40,9 +40,10 @@ export const UserList = () => {
                     primaryText={(record) => record.name}
                     secondaryText={(record) => record.username}
                     tertiaryText={(record) => record.email}
+                    hasBulkActions={false}
                 />
             ) : (
-                <Datagrid rowClick="show">
+                <Datagrid rowClick="show" bulkActionButtons={false}>
                     <TextField source="name" label="Nombre"/>
                     <EmailField source="email" />
                     <TextField source="role" label="Permisos" />
