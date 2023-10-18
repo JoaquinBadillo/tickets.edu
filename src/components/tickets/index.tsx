@@ -23,17 +23,19 @@ import {
   Error,
   useRedirect,
   UrlField,
+  SimpleList
 } from "react-admin";
 
 import { useState } from "react";
 
 import { Box } from "@mui/system";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, Theme, ThemeProvider } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
 import { DataGrid, esES } from "@mui/x-data-grid";
 
 import { TicketTitle } from "./hooks";
+import { useMediaQuery } from "@mui/material";
 
 const defaultTheme = createTheme();
 
@@ -43,9 +45,7 @@ const TicketColumnActions = () => (
   </TopToolbar>
 );
 
-export const TicketList = () => {
-  const { permissions } = usePermissions();
-
+const FullScreenList = (permissions: any) => {
   const redirect = useRedirect();
 
   const { data, isLoading, error } = useGetList("tickets", {
@@ -84,9 +84,11 @@ export const TicketList = () => {
         ),
       },
       { field: "title", headerName: "Título", minWidth: 280 },
+      { field: "category", headerName: "Categoría", minWidth: 100 },
+      { field: "incident", headerName: "Incidente", minWidth: 100 },
       { field: "status", headerName: "Estado", minWidth: 100 },
-      { field: "date", headerName: "Fecha", minWidth: 105 },
-      { field: "folio", headerName: "Folio", minWidth: 150 }
+      { field: "date", headerName: "Fecha", minWidth: 108 },
+      { field: "folio", headerName: "Folio", minWidth: 180 }
     ],
   };
 
@@ -121,6 +123,51 @@ export const TicketList = () => {
       <TicketColumnActions />
       <DataGrid {...content}  localeText={esES.components.MuiDataGrid.defaultProps.localeText}/>
     </Box>
+  );
+}
+
+const SmallScreenList = () => {
+  const redirect = useRedirect();
+
+  const { data, isLoading, error } = useGetList("tickets", {
+    pagination: { page: 1, perPage: 10 },
+    sort: { field: "id", order: "DESC" },
+  });
+
+  if (error) {
+    return (
+      <Error 
+        title={"Error al cargar tickets"} 
+        error={{name: "Error", message: "No se pudieron cargar los tickets"}}
+        onReset={() => {redirect("/"); return;}}
+        resetErrorBoundary={() => {redirect("/"); return;}}
+      />);
+  }
+  
+  if (!data || isLoading)
+    return <Loading />;
+
+  return (
+    <>
+    <CreateButton />
+    <SimpleList data={data}
+      primaryText={(record) => record.title}
+      secondaryText={(record) => `Prioridad: ${record.priority}`}
+      tertiaryText={(record) => record.status}
+      linkType="show"
+    />
+    </>
+  );
+}
+
+export const TicketList = () => {
+  const { permissions } = usePermissions();
+  const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("md"));
+
+  return (
+    isSmall ?
+      <SmallScreenList /> :
+      <FullScreenList permissions={permissions} />
   );
 };
 

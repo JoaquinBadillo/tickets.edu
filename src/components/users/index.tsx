@@ -38,8 +38,8 @@ export const UserList = () => {
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.name}
-                    secondaryText={(record) => record.username}
-                    tertiaryText={(record) => record.email}
+                    secondaryText={(record) => record.email}
+                    tertiaryText={(record) => record.role}
                     hasBulkActions={false}
                 />
             ) : (
