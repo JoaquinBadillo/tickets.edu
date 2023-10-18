@@ -22,6 +22,7 @@ import {
   Loading,
   Error,
   useRedirect,
+  UrlField,
 } from "react-admin";
 
 import { useState } from "react";
@@ -69,7 +70,20 @@ export const TicketList = () => {
   const content: any = {
     rows: data,
     columns: [
-      { field: "id", headerName: "ID", minWidth: 210 },
+      { 
+        field: "id", 
+        headerName: "ID", 
+        minWidth: 210,
+        renderCell: (params: any) => (
+          <ReferenceField
+            record={params.row}
+            source="id"
+            reference="tickets"
+          >
+            <UrlField source="id" href={`#/tickets/${params.row.id}/show`} />
+          </ReferenceField>
+        ),
+      },
       { field: "title", headerName: "Título", minWidth: 280 },
       { field: "status", headerName: "Estado", minWidth: 100 },
       { field: "date", headerName: "Fecha", minWidth: 105 },
