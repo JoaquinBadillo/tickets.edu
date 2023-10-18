@@ -8,6 +8,7 @@ import {
   TicketShow,
 } from "../components/tickets";
 import LoginPage from "./login";
+import TopBar from "./appbar";
 
 export {
   Dashboard,
@@ -17,6 +18,7 @@ export {
   TicketEdit,
   TicketCreate,
   TicketShow,
+  TopBar,
   UserList,
   UserEdit,
   UserCreate,

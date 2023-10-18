@@ -55,7 +55,7 @@ export const UserList = () => {
 
 export const UserEdit = () => {
     return (
-        <Edit title = {<UserTitle />}>
+        <Edit title={<UserTitle />}>
             <ThemeProvider theme={defaultTheme}>
                 <SimpleForm warnWhenUnsavedChanges>
                     <CardHeader 
@@ -163,7 +163,7 @@ export const UserCreate = () => {
 };
 
 export const UserShow = () => (
-    <Show>
+    <Show title={<UserTitle />}>
         <SimpleShowLayout>
             <TextField source="name" label="Nombre" />
             <TextField source="email" />

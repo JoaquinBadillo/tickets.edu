@@ -1,5 +1,4 @@
-import { Admin, CustomRoutes, Resource } from "react-admin";
-import { Route } from "react-router-dom";
+import { Admin, Resource, Layout } from "react-admin";
 
 import {
   Dashboard,
@@ -13,6 +12,7 @@ import {
   UserCreate,
   UserShow,
   TicketShow,
+  TopBar
 } from "../components";
 
 import { authProvider } from "../lib/authProvider";
@@ -29,6 +29,11 @@ const dataProvider = restProvider(
   import.meta.env.VITE_API_URL || "http://127.0.0.1:1337/api"
 );
 
+const CustomLayout = (props: any) => (
+  <Layout {...props} appBar={TopBar} sx={{margin: 0}} />
+);
+
+
 const App = () => (
   <Admin
     authProvider={authProvider}
@@ -36,6 +41,7 @@ const App = () => (
     dashboard={Dashboard}
     loginPage={LoginPage}
     i18nProvider={i18nProvider}
+    layout={CustomLayout}
   >
     {(permissions) => (
       <>
