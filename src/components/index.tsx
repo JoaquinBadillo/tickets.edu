@@ -7,11 +7,9 @@ import {
   TicketCreate,
   TicketShow,
 } from "../components/tickets";
-import { AlbumList } from "./albums";
 import LoginPage from "./login";
 
 export {
-  AlbumList,
   Dashboard,
   LoginPage,
   ReportDashboard,
