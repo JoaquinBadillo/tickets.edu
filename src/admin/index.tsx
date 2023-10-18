@@ -1,4 +1,4 @@
-import { Admin, Resource, Layout, CustomRoutes } from "react-admin";
+import { Admin, Resource, Layout, CustomRoutes, defaultTheme } from "react-admin";
 import { Route } from "react-router-dom";
 
 import {
@@ -35,6 +35,16 @@ const CustomLayout = (props: any) => (
   <Layout {...props} appBar={TopBar} sx={{margin: 0}} />
 );
 
+const theme = {
+  ...defaultTheme,
+  palette: {
+    ...defaultTheme.palette,
+    primary: {
+      main: "#71286b" 
+    }
+  },
+};
+
 
 const App = () => (
   <Admin
@@ -44,6 +54,7 @@ const App = () => (
     loginPage={LoginPage}
     i18nProvider={i18nProvider}
     layout={CustomLayout}
+    theme={theme}
   >
     {(permissions) => (
       <>
