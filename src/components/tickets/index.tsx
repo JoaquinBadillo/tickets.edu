@@ -60,7 +60,7 @@ export const TicketList = () => {
     rows: data,
     columns: [
       { field: "id", headerName: "ID", minWidth: 210 },
-      { field: "title", headerName: "Título", minWidth: 300 },
+      { field: "title", headerName: "Título", minWidth: 280 },
       { field: "status", headerName: "Estado", minWidth: 100 },
       { field: "date", headerName: "Fecha", minWidth: 105 },
       permissions === "admin" && {
@@ -78,6 +78,7 @@ export const TicketList = () => {
           </ReferenceField>
         ),
       },
+      { field: "folio", headerName: "Folio", minWidth: 150 },
       {
         field: "edit",
         headerName: "Editar",
