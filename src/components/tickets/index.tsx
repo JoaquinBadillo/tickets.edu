@@ -24,8 +24,6 @@ import {
   SaveButton,
   useGetList,
   useDataProvider,
-  useRedirect,
-  UrlField,
 } from "react-admin";
 
 import { useState } from "react";
@@ -34,7 +32,7 @@ import { Box } from "@mui/system";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridRowsProp, GridColDef, esES } from "@mui/x-data-grid";
 
 import { TicketTitle } from "./hooks";
 import { TicketFilters } from "./utils";
@@ -61,21 +59,7 @@ export const TicketList = () => {
   const data_test = {
     rows: data,
     columns: [
-      {
-        field: "id",
-        headerName: "ID",
-        minWidth: 210,
-        renderCell: (params) => (
-          <ReferenceField
-            basePath="/tickets"
-            record={params.row}
-            source="id"
-            reference="tickets"
-          >
-            <UrlField source="id" href={`#/tickets/${params.row.id}/show`} />
-          </ReferenceField>
-        ),
-      },
+      { field: "id", headerName: "ID", minWidth: 210 },
       { field: "title", headerName: "Título", minWidth: 280 },
       { field: "status", headerName: "Estado", minWidth: 100 },
       { field: "date", headerName: "Fecha", minWidth: 105 },
@@ -90,7 +74,7 @@ export const TicketList = () => {
             source="userId"
             reference="users"
           >
-            <TextField source="user" />
+            <TextField source="name" />
           </ReferenceField>
         ),
       },
@@ -106,10 +90,30 @@ export const TicketList = () => {
     ],
   };
 
+  /*
+  if (permissions === "admin") {
+    data_test.columns.push({
+      field: "usuario",
+      headerName: "Usuario",
+      minWidth: 120,
+      renderCell: (params) => (
+        <ReferenceField
+          basePath="/tickets"
+          record={params.row}
+          source="userId"
+          reference="users"
+        >
+          <TextField source="name" />
+        </ReferenceField>
+      ),
+    });
+  }
+  */
+
   return (
     <Box sx={{ height: "70%", width: "100%" }}>
       <TicketColumnActions />
-      <DataGrid {...data_test} />
+      <DataGrid {...data_test} localeText={esES.components.MuiDataGrid.defaultProps.localeText}/>
     </Box>
   );
 };
