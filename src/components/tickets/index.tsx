@@ -41,8 +41,6 @@ const defaultTheme = createTheme();
 
 const TicketColumnActions = () => (
   <TopToolbar>
-    <SelectColumnsButton />
-    <FilterButton />
     <CreateButton />
     <ExportButton />
   </TopToolbar>
@@ -65,21 +63,21 @@ export const TicketList = () => {
       { field: "title", headerName: "Título", minWidth: 300 },
       { field: "status", headerName: "Estado", minWidth: 100 },
       { field: "date", headerName: "Fecha", minWidth: 105 },
-      /*{
-            field: "usuario",
-            headerName: "Usuario",
-            minWidth: 120,
-            renderCell: (params) => (
-              <ReferenceField
-                basePath="/tickets"
-                record={params.row}
-                source="userId"
-                reference="users"
-              >
-                <TextField source="name" />
-              </ReferenceField>
-            ),
-          },*/
+      permissions === "admin" && {
+        field: "usuario",
+        headerName: "Usuario",
+        minWidth: 120,
+        renderCell: (params) => (
+          <ReferenceField
+            basePath="/tickets"
+            record={params.row}
+            source="userId"
+            reference="users"
+          >
+            <TextField source="name" />
+          </ReferenceField>
+        ),
+      },
       {
         field: "edit",
         headerName: "Editar",
@@ -91,6 +89,7 @@ export const TicketList = () => {
     ],
   };
 
+  /*
   if (permissions === "admin") {
     data_test.columns.push({
       field: "usuario",
@@ -108,9 +107,11 @@ export const TicketList = () => {
       ),
     });
   }
+  */
 
   return (
     <Box sx={{ height: "70%", width: "100%" }}>
+      <TicketColumnActions />
       <DataGrid {...data_test} />
     </Box>
   );
@@ -165,11 +166,11 @@ export const TicketEdit = () => {
           />
 
           <Box>
-            { permissions === "admin" &&
-              (<ReferenceInput label="Usuario" source="userId" reference="users">
+            {permissions === "admin" && (
+              <ReferenceInput label="Usuario" source="userId" reference="users">
                 <SelectInput label="Usuario" disabled />
-              </ReferenceInput>)
-            }
+              </ReferenceInput>
+            )}
 
             <SelectStatus />
           </Box>
