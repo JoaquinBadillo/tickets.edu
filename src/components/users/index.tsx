@@ -14,8 +14,7 @@ import {
     SelectInput,
     required,
     useCreate,
-    useNotify,
-    SaveButton
+    useNotify
 } from "react-admin";
 
 import { Box, Typography } from "@mui/material";
