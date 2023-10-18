@@ -14,7 +14,9 @@ import {
     SelectInput,
     required,
     useCreate,
-    useNotify
+    useNotify,
+    Toolbar,
+    SaveButton
 } from "react-admin";
 
 import { Box, Typography } from "@mui/material";
@@ -54,11 +56,17 @@ export const UserList = () => {
     );
 };
 
+const UserEditToolbar = (props?: any) => (
+    <Toolbar {...props}>
+      <SaveButton />
+    </Toolbar>
+  );
+
 export const UserEdit = () => {
     return (
         <Edit title={<UserTitle />}>
             <ThemeProvider theme={defaultTheme}>
-                <SimpleForm warnWhenUnsavedChanges>
+                <SimpleForm toolbar={<UserEditToolbar />} warnWhenUnsavedChanges>
                     <CardHeader 
                         title="Editar Usuario"
                         titleTypographyProps={{fontWeight: "bold"}}
