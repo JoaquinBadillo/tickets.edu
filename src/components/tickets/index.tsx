@@ -19,6 +19,9 @@ import {
   Toolbar,
   SaveButton,
   useGetList,
+  Loading,
+  Error,
+  useRedirect,
 } from "react-admin";
 
 import { useState } from "react";
@@ -43,12 +46,25 @@ const TicketColumnActions = () => (
 export const TicketList = () => {
   const { permissions } = usePermissions();
 
+  const redirect = useRedirect();
+
   const { data, isLoading, error } = useGetList("tickets", {
     pagination: { page: 1, perPage: 10 },
     sort: { field: "id", order: "DESC" },
   });
 
-  if (!data || isLoading || error) return <div>loading...</div>;
+  if (error) {
+    return (
+      <Error 
+        title={"Error al cargar tickets"} 
+        error={{name: "Error", message: "No se pudieron cargar los tickets"}}
+        onReset={() => {redirect("/"); return;}}
+        resetErrorBoundary={() => {redirect("/"); return;}}
+      />);
+  }
+  
+  if (!data || isLoading)
+    return <Loading />;
 
   const content: any = {
     rows: data,
