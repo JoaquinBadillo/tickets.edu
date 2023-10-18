@@ -49,6 +49,12 @@ interface IReport {
   value: number;
 }
 
+const tickFormatter = (value: string, _index: number) => {
+  const limit = 9;
+  if (value.length <= limit) return value;
+  return `${value.substring(0, limit)}...`;
+};
+
 const TicketIncident = ({data}: {data: IReport[]}) => (
     <ResponsiveContainer width='90%' minWidth={400} height={300}>
         <BarChart 
@@ -57,7 +63,7 @@ const TicketIncident = ({data}: {data: IReport[]}) => (
           data={data} 
           margin={{left: 0, right: 0, top: 20, bottom: 40}}
         >
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" tickFormatter={tickFormatter} />
           <YAxis />
           <Tooltip content={<CustomTooltip />}/>
           <Bar dataKey="value">
@@ -82,7 +88,7 @@ const TicketIncidentSmall = ({data}: {data: IReport[]}) => (
           data={data} 
           margin={{left: 0, right: 0, top: 20, bottom: 40}}
         >
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" tickFormatter={tickFormatter} />
           <YAxis />
           <Tooltip content={<CustomTooltip />}/>
           <Bar dataKey="value" fill="#F48686">
