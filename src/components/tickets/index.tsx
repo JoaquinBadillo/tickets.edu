@@ -40,7 +40,6 @@ const defaultTheme = createTheme();
 const TicketColumnActions = () => (
   <TopToolbar>
     <CreateButton />
-    <ExportButton />
   </TopToolbar>
 );
 
