@@ -48,7 +48,8 @@ export const authProvider: AuthProvider = {
     );
   },
 
-  checkError: ({ status }: { status: number }) => {
+  checkError: (error) => {
+    const status = error?.status;
     if (status == null || status == 401 || status == 403) {
       if (localStorage.getItem("token"))
         localStorage.removeItem("token");
@@ -56,7 +57,7 @@ export const authProvider: AuthProvider = {
       if (localStorage.getItem("role"))
         localStorage.removeItem("role");
 
-      return Promise.reject(status ?? 401);
+      return Promise.reject();
     }
 
     return Promise.resolve();
