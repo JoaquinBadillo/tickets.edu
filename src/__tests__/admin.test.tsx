@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import Admin from '../admin/index.tsx';
 
-test('jest', async () => {
+test('Render admin', async () => {
  render(<Admin />);
 });
 
