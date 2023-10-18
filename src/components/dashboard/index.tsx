@@ -5,12 +5,15 @@ import FolderIcon from '@mui/icons-material/Folder';
 import LabelIcon from '@mui/icons-material/Label';
 import TaskIcon from '@mui/icons-material/Task';
 import SaveIcon from '@mui/icons-material/Save'; //import CloudIcon from '@mui/icons-material/Cloud';
+import { usePermissions } from "react-admin";
 
 export const Dashboard = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("md"));
     const thicc = isSmall ? "100%" : "45%";
+    const { permissions } = usePermissions();
 
     return (
+        <Container component={"main"} maxWidth={isSmall ? "xs" : undefined}>
         <Card>
             <CssBaseline/>
             <Typography variant="h3" sx={{margin: 2, fontWeight: "bold"}}>
@@ -109,24 +112,60 @@ export const Dashboard = () => {
             </Typography>
                 <Container>
                     <Typography variant="h4" sx={{margin: 2, fontWeight: "bold"}}>
+                        Cambio de Contraseña
+                    </Typography>
+                    <Card>
+                        { !isSmall && <CardMedia
+                            component="img"
+                            sx={{ margin: 2, width: 800, borderRadius: 10 }}
+                            image="./src/assets/tickets/zoomin/passChange.gif"
+                            alt="Boton de Cambiar Contraseña."
+                        />}
+                        { !isSmall && <CardMedia
+                            component="img"
+                            sx={{ margin: 2, width: 800, borderRadius: 10 }}
+                            image="./src/assets/tickets/tutorials/tutorialPassChange.gif"
+                            alt="Tutorial en video para cambiar de contraseña."
+                        />}
+                        <CardContent sx={{fontSize: "16pt"}}>
+                            Este botón te manda a la interfaz de cambio
+                            de contraseña en donde se debe poner una
+                            nueva y verificarla para asegurar que el 
+                            usuario la recuerde.
+                            
+                            Al darle click al botón de cambiar contraseña, 
+                            te va a redirigir a la interfaz para realizar
+                            el cambio, donde se tendrán que llenar los 
+                            campos de "Contraseña" y "Verificar Contraseña".
+                            Una vez llenados, debes darle click al botón: 
+                            "Cambiar Contraseña".
+                        </CardContent>
+                        { !isSmall && <CardMedia
+                            component="img"
+                            sx={{ margin: 2, width: 800, borderRadius: 10 }}
+                            image="./src/assets/tickets/zoomin/changePass.gif"
+                            alt="Boton de Cambiar Contraseña."
+                        />}
+                    </Card>
+                    <Typography variant="h4" sx={{margin: 2, fontWeight: "bold"}}>
                         Tickets
                     </Typography>
                     <Card>
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Crear un Ticket
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/crear.gif"
                             alt="Boton de creación de tickets."
-                        />
-                        <CardMedia
+                        /> }
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialCrear.gif"
                             alt="Tutorial en video de creación de un ticket."
-                        />
+                        /> }
                         <CardContent sx={{fontSize: "16pt"}}>
                             El botón crear te lleva a un formulario 
                             que permite crear un nuevo ticket. 
@@ -170,18 +209,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Editar un Ticket
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/editar.gif"
                             alt="Boton de edición de tickets."
-                        />
-                        <CardMedia
+                        /> }
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialEditar.gif"
                             alt="Tutorial en video de edición de un ticket."
-                        />
+                        /> }
                         <CardContent sx={{fontSize: "16pt"}}>
                             El botón editar te lleva a un formulario 
                             que permite editar un ticket existente. 
@@ -198,30 +237,30 @@ export const Dashboard = () => {
                             cambiado sobre la marcha. Una vez terminado, 
                             se da clic en guardar y listo!
                         </CardContent>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/guardar.gif"
                             alt="Botón de guardar."
-                        />
+                        /> }
                     </Card>
 
                     <Card>
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Orden Ascendente
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/ascending.gif"
                             alt="Botón de ordenamiento ascendente."
-                        />
-                        <CardMedia
+                        /> }
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialAsc.gif"
                             alt="Tutorial en video de acomodar tickets en orden ascendiente."
-                        />
+                        /> }
                         <CardContent sx={{fontSize: "16pt"}}>
                             Permite organizar los tickets en base de datos 
                             para que estén en orden ascendiente.
@@ -240,18 +279,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Orden Descendente
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/descending.gif"
                             alt="Botón de ordenamiento descendente."
-                        />
-                        <CardMedia
+                        /> }
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialDesc.gif"
                             alt="Tutorial en video de acomodar tickets en orden descendente."
-                        />
+                        /> }
                         <CardContent sx={{fontSize: "16pt"}}>
                         Permite organizar los tickets en base de datos 
                             para que estén en orden ascendiente.
@@ -270,18 +309,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Filtrar
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/filtrar.gif"
                             alt="Boton de filtrado de tickets."
-                        />
-                        <CardMedia
+                        /> }
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialFiltro.gif"
                             alt="Tutorial en video de filtrar tickets."
-                        />
+                        /> }
                         <CardContent sx={{fontSize: "16pt"}}>
                             Permite filtrar una columna por valor deseado, por 
                             ejemplo, si se quieren ver los tickets del 18 de 
@@ -314,18 +353,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Ocultar Columna
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/esconder.gif"
                             alt="Boton de ocultar columna."
-                        />
-                        <CardMedia
+                        /> }
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialOculto.gif"
                             alt="Tutorial en video de ocultar una columna."
-                        />
+                        />} 
                         <CardContent sx={{fontSize: "16pt"}}>
                             Permite modificar las columnas que aparecen y por 
                             ende los datos, por ejemplo, se puede eliminar 
@@ -343,18 +382,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Administrar Columnas
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/zoomin/seleccionar.gif"
                             alt="Boton de selección de columnas."
-                        />
-                        <CardMedia
+                        />}
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/tickets/tutorials/tutorialSelect.gif"
                             alt="Tutorial en video de edición de columnas mostradas."
-                        />
+                        />}
                         <CardContent sx={{fontSize: "16pt"}}>
                             Permite modificar las columnas que aparecen y por 
                             ende los datos, por ejemplo, se puede eliminar 
@@ -371,7 +410,7 @@ export const Dashboard = () => {
                         </CardContent>
                     </Card>
                 </Container>
-                <Container>
+                { permissions === "admin" && <Container>
                     <Typography variant="h4" sx={{margin: 2, fontWeight: "bold"}}>
                         Usuarios
                     </Typography>
@@ -379,18 +418,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Crear un Usuario
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/users/zoomin/crear.gif"
                             alt="Boton de creación de usuarios."
-                        />
-                        <CardMedia
+                        />}
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/users/tutorials/tutorialCrear.gif"
                             alt="Tutorial en video de creación de usuarios."
-                        />
+                        />}
                         <CardContent sx={{fontSize: "16pt"}}>
                             Este botón te manda a la interfaz de creación de 
                             ticket, en donde se debe llenar:
@@ -416,18 +455,18 @@ export const Dashboard = () => {
                         <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
                             Editar Usuarios
                         </Typography>
-                        <CardMedia
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/users/zoomin/editar.gif"
                             alt="Boton de edición de usuarios."
-                        />
-                        <CardMedia
+                        />}
+                        { !isSmall && <CardMedia
                             component="img"
                             sx={{ margin: 2, width: 800, borderRadius: 10 }}
                             image="./src/assets/users/tutorials/tutorialEditar.gif"
                             alt="Tutorial en video de edición de usuarios."
-                        />
+                        />}
                         <CardContent sx={{fontSize: "16pt"}}>
                             Este botón te manda a la interfaz de creación de 
                             ticket, en donde se debe llenar:
@@ -449,36 +488,7 @@ export const Dashboard = () => {
                             generada aleatoriamente que será la contraseña del usuario.
                         </CardContent>
                     </Card>
-                    <Card>
-                        <Typography variant="h4" sx={{margin: 2, fontWeight: "medium"}}>
-                            Cambiar Contraseña
-                        </Typography>
-                        <CardMedia
-                            component="img"
-                            sx={{ margin: 2, width: 800, borderRadius: 10 }}
-                            image="./src/assets/tickets/zoomin/passChange.gif"
-                            alt="Boton de edición de usuarios."
-                        />
-                        <CardMedia
-                            component="img"
-                            sx={{ margin: 2, width: 800, borderRadius: 10 }}
-                            image="./src/assets/tickets/tutorials/tutorialPassChange.gif"
-                            alt="Tutorial en video de edición de usuarios."
-                        />
-                        <CardContent sx={{fontSize: "16pt"}}>
-                            Este botón te manda a la interfaz de cambio
-                            de contraseña en donde se debe poner una
-                            nueva y verificarla para asegurar que el 
-                            usuario la recuerde.
-                            
-                            Al darle click al botón de cambiar contraseña, 
-                            te va a redirigir a la interfaz para realizar
-                            el cambio, donde se tendrán que llenar los 
-                            campos de "Contraseña" y "Verificar Contraseña".
-                            Una vez llenados, debes darle click al botón: 
-                            "Cambiar Contraseña".
-                        </CardContent>
-                    </Card>
-                </Container>
+                </Container>}
         </Card>
+        </Container>
     )};
