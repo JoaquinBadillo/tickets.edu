@@ -10,7 +10,10 @@ import {
 import LoginPage from "./login";
 import TopBar from "./appbar";
 
+import ChangePass from "./users/changepass";
+
 export {
+  ChangePass,
   Dashboard,
   LoginPage,
   ReportDashboard,

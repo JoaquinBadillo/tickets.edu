@@ -1,6 +1,8 @@
-import { Admin, Resource, Layout } from "react-admin";
+import { Admin, Resource, Layout, CustomRoutes } from "react-admin";
+import { Route } from "react-router-dom";
 
 import {
+  ChangePass,
   Dashboard,
   LoginPage,
   TicketList,
@@ -77,6 +79,10 @@ const App = () => (
             />
           </>
         )}
+
+        <CustomRoutes>
+          <Route path="/change-password" element={<ChangePass />} />
+        </CustomRoutes>
       </>
     )}
   </Admin>
