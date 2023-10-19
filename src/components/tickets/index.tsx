@@ -237,9 +237,10 @@ export const TicketEdit = () => {
 
           <TextInput
             source="folio"
-            label="Número de Folio"
+            title="Número de folio"
+            label="Número de folio"
             multiline
-            rows={5}
+            rows={1}
             sx={{ minWidth: "150px", width: "80%" }}
           />
 
