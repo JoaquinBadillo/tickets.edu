@@ -1,8 +1,8 @@
 ## Uso
 
-Para correr el proyecto localmente en du máquina será necesario [instalar](#instalacion) las dependencias y crear un archivo . `.env` para las [variables de ambiente](#variables_de_ambiente).
+Para correr el proyecto localmente en du máquina será necesario [Instalación](#instalación) las dependencias y crear un archivo . `.env` para las [Variables de Ambiente](#variables-de-ambiente).
 
-### Instalación <a name="instalacion"></a>
+### Instalación
 
 Este proyecto utiliza el manejador de paquetes `npm`. Es primordial que tenga npm instalado, esto se puede ver con el comando,
 
@@ -19,7 +19,7 @@ npm i
 
 en el directorio origen de su repositiorio (esto debido a que el archivo `package.json` se encuentra aquí).
 
-### Variables de Ambiente <a name="variables_de_ambiente"></a>
+### Variables de Ambiente
 
 Las variables de ambiente nos permiten compartir este repositorio sin exponer información sensible de nuestros servicios en terceros. Las variables del ambiente en cuestión deben de ser declaradas en el archivo `.env`:
 
